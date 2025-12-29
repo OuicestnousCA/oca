@@ -6,6 +6,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/contexts/CartContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 import { getProductById, getRelatedProducts, getAlsoBoughtProducts, type Product } from "@/data/products";
 import ProductCard from "@/components/ProductCard";
 
@@ -13,16 +14,30 @@ const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { isInWishlist, toggleWishlist } = useWishlist();
   
   const product = getProductById(Number(id));
   
   const [selectedColor, setSelectedColor] = useState(product?.colors[0] || null);
   const [selectedSize, setSelectedSize] = useState("");
   const [quantity, setQuantity] = useState(1);
-  const [isWishlisted, setIsWishlisted] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+
+  const isWishlisted = product ? isInWishlist(product.id) : false;
+
+  const handleToggleWishlist = () => {
+    if (!product) return;
+    toggleWishlist({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      image: selectedColor?.image || product.image,
+      category: product.category,
+    });
+  };
 
   if (!product) {
     return (
@@ -281,7 +296,7 @@ const ProductDetail = () => {
                   Add to Cart
                 </Button>
                 <button
-                  onClick={() => setIsWishlisted(!isWishlisted)}
+                  onClick={handleToggleWishlist}
                   className={`w-14 h-14 flex items-center justify-center border transition-all ${
                     isWishlisted 
                       ? "border-[hsl(var(--accent))] text-[hsl(var(--accent))] bg-[hsl(var(--accent))]/10" 

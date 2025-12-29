@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { Instagram, User, Search, ShoppingBag, Menu, X } from "lucide-react";
+import { Instagram, User, Search, ShoppingBag, Heart, Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useCart } from "@/contexts/CartContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, openCart } = useCart();
+  const { totalItems: wishlistItems, openWishlist } = useWishlist();
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -56,6 +58,14 @@ const Header = () => {
           </button>
           <button className="icon-btn" aria-label="Account">
             <User className="w-5 h-5" />
+          </button>
+          <button className="icon-btn relative" aria-label="Wishlist" onClick={openWishlist}>
+            <Heart className="w-5 h-5" />
+            {wishlistItems > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-foreground text-background text-[10px] flex items-center justify-center font-medium">
+                {wishlistItems}
+              </span>
+            )}
           </button>
           <button className="icon-btn relative" aria-label="Cart" onClick={openCart}>
             <ShoppingBag className="w-5 h-5" />
