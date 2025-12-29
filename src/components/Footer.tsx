@@ -1,5 +1,6 @@
 import { Instagram } from "lucide-react";
 import { Link } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const Footer = () => {
   return (
@@ -8,8 +9,8 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
-            <Link to="/" className="font-display text-2xl tracking-wider">
-              OUICESTNOUS
+            <Link to="/">
+              <img src={logo} alt="OUICESTNOUS" className="h-6 w-auto invert" />
             </Link>
             <p className="mt-4 text-muted-foreground text-sm max-w-xs">
               Authentic streetwear from South Africa. Express yourself through fashion.

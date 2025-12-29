@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Instagram, User, Search, ShoppingBag, Menu, X } from "lucide-react";
+import logo from "@/assets/logo.png";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -36,8 +37,8 @@ const Header = () => {
       {/* Main nav */}
       <nav className="container flex items-center justify-between py-4">
         {/* Logo */}
-        <Link to="/" className="font-display text-2xl md:text-3xl tracking-wider">
-          OUICESTNOUS
+        <Link to="/">
+          <img src={logo} alt="OUICESTNOUS" className="h-6 md:h-8 w-auto invert" />
         </Link>
 
         {/* Desktop nav */}
