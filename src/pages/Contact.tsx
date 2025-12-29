@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import AnnouncementBar from "@/components/AnnouncementBar";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Contact = () => {
   return (
@@ -113,6 +114,7 @@ const Contact = () => {
           </div>
         </main>
         <Footer />
+        <ThemeToggle />
       </div>
     </>
   );
