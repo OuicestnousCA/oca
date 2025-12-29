@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Heart, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
+import { useWishlist } from "@/contexts/WishlistContext";
 import type { Product, ColorVariant } from "@/data/products";
 
 interface ProductCardProps {
@@ -11,10 +12,12 @@ interface ProductCardProps {
 const ProductCard = ({ product }: ProductCardProps) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
-  const [isWishlisted, setIsWishlisted] = useState(false);
+  const { isInWishlist, toggleWishlist } = useWishlist();
   const [hoveredColor, setHoveredColor] = useState<ColorVariant | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
+  const isWishlisted = isInWishlist(product.id);
+  
   const displayImage = hoveredColor?.image || product.image;
   
   const discountPercentage = product.originalPrice 
@@ -37,7 +40,14 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   const handleWishlist = (e: React.MouseEvent) => {
     e.stopPropagation();
-    setIsWishlisted(!isWishlisted);
+    toggleWishlist({
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      originalPrice: product.originalPrice,
+      image: product.image,
+      category: product.category,
+    });
   };
 
   const handleCardClick = () => {
