@@ -2,9 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Instagram, User, Search, ShoppingBag, Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { useCart } from "@/contexts/CartContext";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { totalItems, openCart } = useCart();
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -55,11 +57,13 @@ const Header = () => {
           <button className="icon-btn" aria-label="Account">
             <User className="w-5 h-5" />
           </button>
-          <button className="icon-btn relative" aria-label="Cart">
+          <button className="icon-btn relative" aria-label="Cart" onClick={openCart}>
             <ShoppingBag className="w-5 h-5" />
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-foreground text-background text-[10px] flex items-center justify-center font-medium">
-              0
-            </span>
+            {totalItems > 0 && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-foreground text-background text-[10px] flex items-center justify-center font-medium">
+                {totalItems}
+              </span>
+            )}
           </button>
           <button 
             className="icon-btn md:hidden" 
