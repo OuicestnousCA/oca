@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { Link, useNavigate } from "react-router-dom";
-import { ArrowLeft, Check } from "lucide-react";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { ArrowLeft, Check, Loader2 } from "lucide-react";
 import { useCart } from "@/contexts/CartContext";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import ThemeToggle from "@/components/ThemeToggle";
 import logo from "@/assets/logo.png";
 
@@ -11,27 +12,137 @@ const Checkout = () => {
   const { items, totalPrice, clearCart } = useCart();
   const { toast } = useToast();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(false);
   const [orderComplete, setOrderComplete] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    phone: "",
+    firstName: "",
+    lastName: "",
+    address: "",
+    city: "",
+    postalCode: "",
+  });
 
   const formatPrice = (amount: number) => {
     return `R${amount.toFixed(2).replace(".", ",")}`;
+  };
+
+  // Check for payment callback
+  useEffect(() => {
+    const reference = searchParams.get("reference");
+    if (reference) {
+      verifyPayment(reference);
+    }
+  }, [searchParams]);
+
+  const verifyPayment = async (reference: string) => {
+    setIsVerifying(true);
+    try {
+      const { data, error } = await supabase.functions.invoke("paystack-verify", {
+        body: { reference },
+      });
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (data.data?.status === "success") {
+        setOrderComplete(true);
+        clearCart();
+        toast({
+          title: "Payment successful!",
+          description: "Your order has been placed. Check your email for confirmation.",
+        });
+      } else {
+        toast({
+          title: "Payment verification failed",
+          description: data.data?.gateway_response || "Please try again.",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error("Payment verification error:", error);
+      toast({
+        title: "Error verifying payment",
+        description: "Please contact support if payment was deducted.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsVerifying(false);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate order processing
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const { data, error } = await supabase.functions.invoke("paystack-initialize", {
+        body: {
+          email: formData.email,
+          amount: totalPrice,
+          callback_url: window.location.href,
+          metadata: {
+            customer_name: `${formData.firstName} ${formData.lastName}`,
+            phone: formData.phone,
+            address: formData.address,
+            city: formData.city,
+            postal_code: formData.postalCode,
+            items: items.map((item) => ({
+              name: item.name,
+              quantity: item.quantity,
+              price: item.price,
+            })),
+          },
+        },
+      });
 
-    setOrderComplete(true);
-    clearCart();
-    toast({
-      title: "Order placed successfully!",
-      description: "You will receive a confirmation email shortly.",
-    });
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (data.data?.authorization_url) {
+        // Redirect to Paystack payment page
+        window.location.href = data.data.authorization_url;
+      } else {
+        throw new Error("No authorization URL received");
+      }
+    } catch (error) {
+      console.error("Payment initialization error:", error);
+      toast({
+        title: "Error initializing payment",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+    }
   };
+
+  if (isVerifying) {
+    return (
+      <>
+        <Helmet>
+          <title>Verifying Payment | OUICESTNOUS</title>
+        </Helmet>
+        <div className="min-h-screen flex flex-col items-center justify-center p-4">
+          <Loader2 className="w-12 h-12 animate-spin text-primary mb-4" />
+          <h1 className="font-display text-2xl tracking-wider mb-2">
+            Verifying Payment
+          </h1>
+          <p className="text-muted-foreground">Please wait...</p>
+          <ThemeToggle />
+        </div>
+      </>
+    );
+  }
 
   if (items.length === 0 && !orderComplete) {
     return (
@@ -130,6 +241,8 @@ const Checkout = () => {
                         type="email"
                         id="email"
                         required
+                        value={formData.email}
+                        onChange={handleInputChange}
                         className="w-full bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
                       />
                     </div>
@@ -141,6 +254,8 @@ const Checkout = () => {
                         type="tel"
                         id="phone"
                         required
+                        value={formData.phone}
+                        onChange={handleInputChange}
                         className="w-full bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
                       />
                     </div>
@@ -161,6 +276,8 @@ const Checkout = () => {
                           type="text"
                           id="firstName"
                           required
+                          value={formData.firstName}
+                          onChange={handleInputChange}
                           className="w-full bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
                         />
                       </div>
@@ -172,6 +289,8 @@ const Checkout = () => {
                           type="text"
                           id="lastName"
                           required
+                          value={formData.lastName}
+                          onChange={handleInputChange}
                           className="w-full bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
                         />
                       </div>
@@ -184,6 +303,8 @@ const Checkout = () => {
                         type="text"
                         id="address"
                         required
+                        value={formData.address}
+                        onChange={handleInputChange}
                         className="w-full bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
                       />
                     </div>
@@ -196,6 +317,8 @@ const Checkout = () => {
                           type="text"
                           id="city"
                           required
+                          value={formData.city}
+                          onChange={handleInputChange}
                           className="w-full bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
                         />
                       </div>
@@ -207,6 +330,8 @@ const Checkout = () => {
                           type="text"
                           id="postalCode"
                           required
+                          value={formData.postalCode}
+                          onChange={handleInputChange}
                           className="w-full bg-background border border-border px-4 py-3 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
                         />
                       </div>
@@ -217,9 +342,16 @@ const Checkout = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {isSubmitting ? "Processing..." : `Pay ${formatPrice(totalPrice)}`}
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Redirecting to Paystack...
+                    </>
+                  ) : (
+                    `Pay with Paystack - ${formatPrice(totalPrice)}`
+                  )}
                 </button>
               </form>
             </div>
