@@ -18,6 +18,12 @@ const products = [
     originalPrice: 699.99,
     image: hoodieBlack,
     isOnSale: true,
+    colors: [
+      { name: "Black", hex: "#1a1a1a" },
+      { name: "Charcoal", hex: "#3d3d3d" },
+      { name: "Navy", hex: "#1e3a5f" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
   },
   {
     id: 2,
@@ -25,6 +31,12 @@ const products = [
     price: 299.99,
     image: teePink,
     isOnSale: false,
+    colors: [
+      { name: "Pink", hex: "#e8a0b5" },
+      { name: "White", hex: "#ffffff" },
+      { name: "Black", hex: "#1a1a1a" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
   },
   {
     id: 3,
@@ -32,6 +44,11 @@ const products = [
     price: 399.99,
     image: jerseyWhite,
     isOnSale: false,
+    colors: [
+      { name: "White", hex: "#ffffff" },
+      { name: "Black", hex: "#1a1a1a" },
+    ],
+    sizes: ["S", "M", "L", "XL", "XXL"],
   },
   {
     id: 4,
@@ -39,6 +56,11 @@ const products = [
     price: 399.99,
     image: jerseyBlack,
     isOnSale: false,
+    colors: [
+      { name: "Black", hex: "#1a1a1a" },
+      { name: "White", hex: "#ffffff" },
+    ],
+    sizes: ["S", "M", "L", "XL", "XXL"],
   },
   {
     id: 5,
@@ -46,6 +68,12 @@ const products = [
     price: 799.99,
     image: pufferBlue,
     isOnSale: false,
+    colors: [
+      { name: "Blue", hex: "#3a6ea5" },
+      { name: "Black", hex: "#1a1a1a" },
+      { name: "Olive", hex: "#556b2f" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
   },
   {
     id: 6,
@@ -54,6 +82,12 @@ const products = [
     originalPrice: 249.99,
     image: capPink,
     isOnSale: true,
+    colors: [
+      { name: "Pink", hex: "#e8a0b5" },
+      { name: "Black", hex: "#1a1a1a" },
+      { name: "White", hex: "#ffffff" },
+    ],
+    sizes: ["One Size"],
   },
   {
     id: 7,
@@ -62,6 +96,11 @@ const products = [
     originalPrice: 499.99,
     image: shortsBlack,
     isOnSale: true,
+    colors: [
+      { name: "Black", hex: "#1a1a1a" },
+      { name: "Grey", hex: "#6b6b6b" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
   },
   {
     id: 8,
@@ -69,6 +108,12 @@ const products = [
     price: 399.99,
     image: teeBlack,
     isOnSale: false,
+    colors: [
+      { name: "Black", hex: "#1a1a1a" },
+      { name: "White", hex: "#ffffff" },
+      { name: "Grey", hex: "#6b6b6b" },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
   },
 ];
 
