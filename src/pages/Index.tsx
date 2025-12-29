@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import ProductGrid from "@/components/ProductGrid";
 import Footer from "@/components/Footer";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const Index = () => {
   return (
@@ -26,6 +27,7 @@ const Index = () => {
           <ProductGrid />
         </main>
         <Footer />
+        <ThemeToggle />
       </div>
     </>
   );

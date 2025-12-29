@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Instagram, User, Search, ShoppingBag, Menu, X } from "lucide-react";
 import logo from "@/assets/logo.png";
-import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -53,7 +52,6 @@ const Header = () => {
           <button className="icon-btn hidden md:flex" aria-label="Search">
             <Search className="w-5 h-5" />
           </button>
-          <ThemeToggle />
           <button className="icon-btn" aria-label="Account">
             <User className="w-5 h-5" />
           </button>
