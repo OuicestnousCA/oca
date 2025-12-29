@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Brand */}
           <div>
             <Link to="/">
-              <img src={logo} alt="OUICESTNOUS" className="h-6 w-auto invert" />
+              <img src={logo} alt="OUICESTNOUS" className="h-6 w-auto dark:invert-0 invert" />
             </Link>
             <p className="mt-4 text-muted-foreground text-sm max-w-xs">
               Authentic streetwear from South Africa. Express yourself through fashion.
