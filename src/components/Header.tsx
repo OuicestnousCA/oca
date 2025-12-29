@@ -4,13 +4,11 @@ import { Instagram, User, Search, ShoppingBag, Heart, Menu, X } from "lucide-rea
 import logo from "@/assets/logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
-import { useSearch } from "@/contexts/SearchContext";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, openCart } = useCart();
   const { totalItems: wishlistItems, openWishlist } = useWishlist();
-  const { openSearch } = useSearch();
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -55,7 +53,7 @@ const Header = () => {
 
         {/* Icons */}
         <div className="flex items-center gap-1">
-          <button className="icon-btn" aria-label="Search" onClick={openSearch}>
+          <button className="icon-btn hidden md:flex" aria-label="Search">
             <Search className="w-5 h-5" />
           </button>
           <button className="icon-btn" aria-label="Account">
