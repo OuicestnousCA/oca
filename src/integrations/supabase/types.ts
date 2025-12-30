@@ -14,7 +14,69 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      orders: {
+        Row: {
+          created_at: string
+          customer_email: string
+          customer_name: string
+          customer_phone: string | null
+          id: string
+          items: Json
+          order_number: string
+          payment_provider: string | null
+          payment_reference: string | null
+          payment_status: Database["public"]["Enums"]["payment_status"]
+          shipping_address: Json | null
+          shipping_cost: number
+          status: Database["public"]["Enums"]["order_status"]
+          subtotal: number
+          tax: number
+          total: number
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          customer_email: string
+          customer_name: string
+          customer_phone?: string | null
+          id?: string
+          items?: Json
+          order_number: string
+          payment_provider?: string | null
+          payment_reference?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"]
+          shipping_address?: Json | null
+          shipping_cost?: number
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal?: number
+          tax?: number
+          total?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          customer_email?: string
+          customer_name?: string
+          customer_phone?: string | null
+          id?: string
+          items?: Json
+          order_number?: string
+          payment_provider?: string | null
+          payment_reference?: string | null
+          payment_status?: Database["public"]["Enums"]["payment_status"]
+          shipping_address?: Json | null
+          shipping_cost?: number
+          status?: Database["public"]["Enums"]["order_status"]
+          subtotal?: number
+          tax?: number
+          total?: number
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -23,7 +85,14 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      order_status:
+        | "pending"
+        | "confirmed"
+        | "processing"
+        | "shipped"
+        | "delivered"
+        | "cancelled"
+      payment_status: "pending" | "completed" | "failed" | "refunded"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +219,16 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      order_status: [
+        "pending",
+        "confirmed",
+        "processing",
+        "shipped",
+        "delivered",
+        "cancelled",
+      ],
+      payment_status: ["pending", "completed", "failed", "refunded"],
+    },
   },
 } as const
