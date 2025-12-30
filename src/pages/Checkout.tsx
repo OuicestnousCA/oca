@@ -92,14 +92,19 @@ const Checkout = () => {
           callback_url: window.location.href,
           metadata: {
             customer_name: `${formData.firstName} ${formData.lastName}`,
+            customer_email: formData.email,
             phone: formData.phone,
-            address: formData.address,
-            city: formData.city,
-            postal_code: formData.postalCode,
+            shipping_address: {
+              address: formData.address,
+              city: formData.city,
+              postal_code: formData.postalCode,
+            },
             items: items.map((item) => ({
+              id: item.id,
               name: item.name,
               quantity: item.quantity,
               price: item.price,
+              image: item.image,
             })),
           },
         },
