@@ -61,13 +61,13 @@ const Footer = () => {
                 </svg>
               </a>
             </div>
-            <div className="flex">
+            <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
               <input 
                 type="email" 
                 placeholder="Enter your email"
-                className="flex-1 bg-background border border-border px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
+                className="w-full sm:flex-1 bg-background border border-border px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
               />
-              <button className="btn-primary px-6">
+              <button className="btn-primary px-6 py-2 w-full sm:w-auto">
                 Subscribe
               </button>
             </div>
