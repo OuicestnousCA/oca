@@ -1,14 +1,29 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import { Instagram, User, Search, ShoppingBag, Heart, Menu, X } from "lucide-react";
+import { Link, useNavigate } from "react-router-dom";
+import { Instagram, User, Search, ShoppingBag, Heart, Menu, X, LogOut, Package } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
+import { useAuth } from "@/contexts/AuthContext";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { totalItems, openCart } = useCart();
   const { totalItems: wishlistItems, openWishlist } = useWishlist();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -56,9 +71,38 @@ const Header = () => {
           <button className="icon-btn hidden md:flex" aria-label="Search">
             <Search className="w-5 h-5" />
           </button>
-          <button className="icon-btn" aria-label="Account">
-            <User className="w-5 h-5" />
-          </button>
+          
+          {user ? (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button className="icon-btn" aria-label="Account">
+                  <User className="w-5 h-5" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <div className="px-2 py-1.5 text-sm font-medium truncate">
+                  {user.user_metadata?.full_name || user.email}
+                </div>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link to="/orders" className="flex items-center gap-2 cursor-pointer">
+                    <Package className="w-4 h-4" />
+                    My Orders
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2 cursor-pointer">
+                  <LogOut className="w-4 h-4" />
+                  Sign Out
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          ) : (
+            <Link to="/auth" className="icon-btn" aria-label="Account">
+              <User className="w-5 h-5" />
+            </Link>
+          )}
+
           <button className="icon-btn relative" aria-label="Wishlist" onClick={openWishlist}>
             <Heart className="w-5 h-5" />
             {wishlistItems > 0 && (
@@ -91,6 +135,9 @@ const Header = () => {
           <div className="container py-6 flex flex-col gap-4">
             <Link to="/" className="nav-link py-2">Home</Link>
             <Link to="/contact" className="nav-link py-2">Contact</Link>
+            {user && (
+              <Link to="/orders" className="nav-link py-2">My Orders</Link>
+            )}
             <div className="flex items-center gap-4 pt-4 border-t border-border">
               <a 
                 href="https://instagram.com" 
