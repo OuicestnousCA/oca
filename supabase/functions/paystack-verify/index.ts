@@ -101,6 +101,40 @@ serve(async (req) => {
         console.log('Order saved successfully:', orderResult.id);
         // Add order info to the response
         data.order = orderResult;
+        
+        // Send order confirmation email
+        try {
+          const emailPayload = {
+            customerEmail: customerEmail,
+            customerName: customerName,
+            orderNumber: orderData.order_number,
+            items: items,
+            total: totalAmount,
+            shippingAddress: shippingAddress,
+          };
+          
+          const emailResponse = await fetch(
+            `${supabaseUrl}/functions/v1/send-order-confirmation`,
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${supabaseServiceKey}`,
+              },
+              body: JSON.stringify(emailPayload),
+            }
+          );
+          
+          if (emailResponse.ok) {
+            console.log('Order confirmation email sent successfully');
+          } else {
+            const emailError = await emailResponse.text();
+            console.error('Failed to send order confirmation email:', emailError);
+          }
+        } catch (emailError) {
+          console.error('Error sending order confirmation email:', emailError);
+          // Don't fail the payment verification if email fails
+        }
       }
     }
 
