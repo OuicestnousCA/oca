@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Instagram, User, Search, ShoppingBag, Heart, Menu, X, LogOut, Package } from "lucide-react";
+import { Instagram, User, Search, ShoppingBag, Heart, Menu, X, LogOut, Package, Shield } from "lucide-react";
 import logo from "@/assets/logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
 import { useAuth } from "@/contexts/AuthContext";
+import { useAdminCheck } from "@/hooks/useAdminCheck";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,6 +19,7 @@ const Header = () => {
   const { totalItems, openCart } = useCart();
   const { totalItems: wishlistItems, openWishlist } = useWishlist();
   const { user, signOut } = useAuth();
+  const { isAdmin } = useAdminCheck();
   const navigate = useNavigate();
 
   const handleSignOut = async () => {
@@ -90,6 +92,14 @@ const Header = () => {
                     My Orders
                   </Link>
                 </DropdownMenuItem>
+                {isAdmin && (
+                  <DropdownMenuItem asChild>
+                    <Link to="/admin" className="flex items-center gap-2 cursor-pointer">
+                      <Shield className="w-4 h-4" />
+                      Admin Dashboard
+                    </Link>
+                  </DropdownMenuItem>
+                )}
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignOut} className="flex items-center gap-2 cursor-pointer">
                   <LogOut className="w-4 h-4" />
@@ -136,7 +146,12 @@ const Header = () => {
             <Link to="/" className="nav-link py-2">Home</Link>
             <Link to="/contact" className="nav-link py-2">Contact</Link>
             {user && (
-              <Link to="/orders" className="nav-link py-2">My Orders</Link>
+              <>
+                <Link to="/orders" className="nav-link py-2">My Orders</Link>
+                {isAdmin && (
+                  <Link to="/admin" className="nav-link py-2">Admin Dashboard</Link>
+                )}
+              </>
             )}
             <div className="flex items-center gap-4 pt-4 border-t border-border">
               <a 
