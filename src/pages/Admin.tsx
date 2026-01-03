@@ -14,8 +14,9 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Package, DollarSign, ShoppingCart, TrendingUp, Loader2, ShieldAlert, Users, Search, UserPlus, UserMinus } from "lucide-react";
+import { Package, DollarSign, ShoppingCart, TrendingUp, Loader2, ShieldAlert, Users, Search, UserPlus, UserMinus, BarChart3 } from "lucide-react";
 import { format } from "date-fns";
+import SalesAnalytics from "@/components/admin/SalesAnalytics";
 
 interface Order {
   id: string;
@@ -309,6 +310,10 @@ const Admin = () => {
           <Tabs defaultValue="orders" className="space-y-4">
             <TabsList>
               <TabsTrigger value="orders">Orders</TabsTrigger>
+              <TabsTrigger value="analytics">
+                <BarChart3 className="h-4 w-4 mr-2" />
+                Analytics
+              </TabsTrigger>
               <TabsTrigger value="users">
                 <Users className="h-4 w-4 mr-2" />
                 User Management
@@ -412,6 +417,11 @@ const Admin = () => {
                   </TabsContent>
                 ))}
               </Tabs>
+            </TabsContent>
+
+            {/* Analytics Tab */}
+            <TabsContent value="analytics">
+              <SalesAnalytics orders={orders} />
             </TabsContent>
 
             {/* User Management Tab */}
