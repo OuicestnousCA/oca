@@ -14,9 +14,10 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Package, DollarSign, ShoppingCart, TrendingUp, Loader2, ShieldAlert, Users, Search, UserPlus, UserMinus, BarChart3 } from "lucide-react";
+import { Package, DollarSign, ShoppingCart, TrendingUp, Loader2, ShieldAlert, Users, Search, UserPlus, UserMinus, BarChart3, Download, FileText } from "lucide-react";
 import { format } from "date-fns";
 import SalesAnalytics from "@/components/admin/SalesAnalytics";
+import { exportOrdersToCSV, exportAnalyticsToPDF } from "@/utils/exportUtils";
 
 interface Order {
   id: string;
@@ -261,7 +262,35 @@ const Admin = () => {
 
       <main className="min-h-screen bg-background py-8">
         <div className="container mx-auto px-4">
-          <h1 className="text-3xl font-bold mb-8">Admin Dashboard</h1>
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+            <div className="flex gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  exportOrdersToCSV(orders);
+                  toast.success("Orders exported to CSV");
+                }}
+                disabled={orders.length === 0}
+              >
+                <Download className="h-4 w-4 mr-2" />
+                Export CSV
+              </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  exportAnalyticsToPDF(orders);
+                  toast.success("Analytics report opened for printing");
+                }}
+                disabled={orders.length === 0}
+              >
+                <FileText className="h-4 w-4 mr-2" />
+                Export PDF
+              </Button>
+            </div>
+          </div>
 
           {/* Stats Cards */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
