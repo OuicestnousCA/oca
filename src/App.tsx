@@ -15,6 +15,7 @@ import Contact from "./pages/Contact";
 import Checkout from "./pages/Checkout";
 import ProductDetail from "./pages/ProductDetail";
 import Auth from "./pages/Auth";
+import ResetPassword from "./pages/ResetPassword";
 import Orders from "./pages/Orders";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
@@ -40,6 +41,7 @@ const App = () => (
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/auth" element={<Auth />} />
+                    <Route path="/reset-password" element={<ResetPassword />} />
                     <Route path="/orders" element={<Orders />} />
                     <Route path="/admin" element={<Admin />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
