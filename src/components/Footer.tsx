@@ -1,11 +1,108 @@
-import { Instagram } from "lucide-react";
+import { Instagram, Truck, RotateCcw } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo.png";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email.trim()) {
+      toast.error("Please enter your email address");
+      return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const { data, error } = await supabase.functions.invoke("newsletter-subscribe", {
+        body: { email: email.trim() },
+      });
+
+      if (error) throw error;
+
+      if (data.alreadySubscribed) {
+        toast.info("You're already subscribed to our newsletter!");
+      } else {
+        toast.success("Successfully subscribed to our newsletter!");
+      }
+      setEmail("");
+    } catch (error: any) {
+      console.error("Newsletter subscription error:", error);
+      toast.error("Failed to subscribe. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <footer className="bg-secondary py-16">
-      <div className="container">
+    <footer className="bg-secondary">
+      {/* Features Bar */}
+      <div className="border-b border-border">
+        <div className="container py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+            {/* 7 Days Return */}
+            <div className="flex items-start gap-4">
+              <RotateCcw className="w-6 h-6 shrink-0" />
+              <div>
+                <h4 className="font-display text-sm tracking-wide uppercase mb-1">7 Days Return</h4>
+                <p className="text-xs text-muted-foreground">
+                  For Local and national purchases only.<br />
+                  For international purchases, kindly<br />
+                  <Link to="/contact" className="underline hover:text-foreground">Contact us</Link>
+                </p>
+              </div>
+            </div>
+
+            {/* Free Shipping */}
+            <div className="flex items-start gap-4">
+              <Truck className="w-6 h-6 shrink-0" />
+              <div>
+                <h4 className="font-display text-sm tracking-wide uppercase mb-1">Free Shipping</h4>
+                <p className="text-xs text-muted-foreground">
+                  Local and national orders over R500.
+                </p>
+              </div>
+            </div>
+
+            {/* Newsletter */}
+            <div>
+              <h4 className="font-display text-sm tracking-wide uppercase mb-3">Newsletter Sign Up</h4>
+              <form onSubmit={handleSubscribe} className="flex gap-0">
+                <input 
+                  type="email" 
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Your email please"
+                  className="flex-1 bg-background border border-border border-r-0 px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
+                  disabled={isSubmitting}
+                />
+                <button 
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="bg-foreground text-background px-6 py-2 text-sm font-medium hover:bg-foreground/90 transition-colors disabled:opacity-50"
+                >
+                  {isSubmitting ? "..." : "SUBSCRIBE"}
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Footer */}
+      <div className="container py-12">
         <div className="grid md:grid-cols-3 gap-12">
           {/* Brand */}
           <div>
@@ -36,10 +133,10 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/* Social & Newsletter */}
+          {/* Social */}
           <div>
             <h4 className="font-display text-lg tracking-wide mb-4">Stay Connected</h4>
-            <div className="flex items-center gap-3 mb-6">
+            <div className="flex items-center gap-3">
               <a 
                 href="https://instagram.com" 
                 target="_blank" 
@@ -60,16 +157,6 @@ const Footer = () => {
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
                 </svg>
               </a>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-0">
-              <input 
-                type="email" 
-                placeholder="Enter your email"
-                className="w-full sm:flex-1 bg-background border border-border px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-foreground"
-              />
-              <button className="btn-primary px-6 py-2 w-full sm:w-auto">
-                Subscribe
-              </button>
             </div>
           </div>
         </div>
