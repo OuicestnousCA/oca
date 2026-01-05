@@ -14,7 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Package, DollarSign, ShoppingCart, TrendingUp, Loader2, ShieldAlert, Users, Search, UserPlus, UserMinus, BarChart3, Download, FileText, Boxes } from "lucide-react";
+import { Package, DollarSign, ShoppingCart, TrendingUp, Loader2, ShieldAlert, Users, Search, UserPlus, UserMinus, BarChart3, Download, FileText, Boxes, Mail } from "lucide-react";
 import { format } from "date-fns";
 import SalesAnalytics from "@/components/admin/SalesAnalytics";
 import InventoryManagement from "@/components/admin/InventoryManagement";
@@ -39,6 +39,13 @@ interface UserRole {
   created_at: string;
 }
 
+interface NewsletterSubscriber {
+  id: string;
+  email: string;
+  subscribed_at: string;
+  is_active: boolean;
+}
+
 const Admin = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
@@ -59,6 +66,10 @@ const Admin = () => {
   const [searchedUserEmail, setSearchedUserEmail] = useState<string | null>(null);
   const [searchedUserId, setSearchedUserId] = useState<string | null>(null);
   const [searchLoading, setSearchLoading] = useState(false);
+  
+  // Newsletter subscribers state
+  const [subscribers, setSubscribers] = useState<NewsletterSubscriber[]>([]);
+  const [subscribersLoading, setSubscribersLoading] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) {
@@ -70,6 +81,7 @@ const Admin = () => {
     if (isAdmin) {
       fetchOrders();
       fetchUserRoles();
+      fetchSubscribers();
     }
   }, [isAdmin]);
 
@@ -105,6 +117,49 @@ const Admin = () => {
       setUserRoles((data || []) as UserRole[]);
     }
     setUsersLoading(false);
+  };
+
+  const fetchSubscribers = async () => {
+    setSubscribersLoading(true);
+    const { data, error } = await supabase
+      .from("newsletter_subscribers")
+      .select("*")
+      .order("subscribed_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching subscribers:", error);
+      toast.error("Failed to load subscribers");
+    } else {
+      setSubscribers((data || []) as NewsletterSubscriber[]);
+    }
+    setSubscribersLoading(false);
+  };
+
+  const exportSubscribersToCSV = () => {
+    const headers = ["Email", "Subscribed Date", "Status"];
+    const rows = subscribers.map((sub) => [
+      sub.email,
+      format(new Date(sub.subscribed_at), "yyyy-MM-dd HH:mm"),
+      sub.is_active ? "Active" : "Inactive",
+    ]);
+
+    const csvContent = [
+      headers.join(","),
+      ...rows.map((row) =>
+        row.map((cell) => `"${String(cell).replace(/"/g, '""')}"`).join(",")
+      ),
+    ].join("\n");
+
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+
+    link.setAttribute("href", url);
+    link.setAttribute("download", `newsletter-subscribers-${format(new Date(), "yyyy-MM-dd")}.csv`);
+    link.style.visibility = "hidden";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const searchUserByEmail = async () => {
@@ -348,6 +403,10 @@ const Admin = () => {
                 <Users className="h-4 w-4 mr-2" />
                 User Management
               </TabsTrigger>
+              <TabsTrigger value="subscribers">
+                <Mail className="h-4 w-4 mr-2" />
+                Newsletter
+              </TabsTrigger>
               <TabsTrigger value="inventory">
                 <Boxes className="h-4 w-4 mr-2" />
                 Inventory
@@ -569,6 +628,68 @@ const Admin = () => {
                   </CardContent>
                 </Card>
               </div>
+            </TabsContent>
+
+            {/* Newsletter Subscribers Tab */}
+            <TabsContent value="subscribers">
+              <Card>
+                <CardHeader className="flex flex-row items-center justify-between">
+                  <CardTitle className="flex items-center gap-2">
+                    <Mail className="h-5 w-5" />
+                    Newsletter Subscribers ({subscribers.length})
+                  </CardTitle>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      exportSubscribersToCSV();
+                      toast.success("Subscribers exported to CSV");
+                    }}
+                    disabled={subscribers.length === 0}
+                  >
+                    <Download className="h-4 w-4 mr-2" />
+                    Export CSV
+                  </Button>
+                </CardHeader>
+                <CardContent>
+                  {subscribersLoading ? (
+                    <div className="flex justify-center py-8">
+                      <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                    </div>
+                  ) : subscribers.length === 0 ? (
+                    <p className="text-center py-8 text-muted-foreground">
+                      No newsletter subscribers yet.
+                    </p>
+                  ) : (
+                    <div className="overflow-x-auto">
+                      <Table>
+                        <TableHeader>
+                          <TableRow>
+                            <TableHead>Email</TableHead>
+                            <TableHead>Subscribed Date</TableHead>
+                            <TableHead>Status</TableHead>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody>
+                          {subscribers.map((sub) => (
+                            <TableRow key={sub.id}>
+                              <TableCell className="font-medium">{sub.email}</TableCell>
+                              <TableCell>
+                                {format(new Date(sub.subscribed_at), "MMM d, yyyy 'at' h:mm a")}
+                              </TableCell>
+                              <TableCell>
+                                <Badge className={sub.is_active ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" : "bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200"}>
+                                  {sub.is_active ? "Active" : "Inactive"}
+                                </Badge>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </TableBody>
+                      </Table>
+                    </div>
+                  )}
+                </CardContent>
+              </Card>
             </TabsContent>
 
             {/* Inventory Tab */}
