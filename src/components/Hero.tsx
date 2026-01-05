@@ -1,11 +1,14 @@
-import heroImage from "@/assets/hero-image.jpg";
+import heroVideo from "@/assets/hero-video.mp4";
 
 const Hero = () => {
   return (
     <section className="hero-section">
-      <img 
-        src={heroImage} 
-        alt="Streetwear fashion - person silhouette against horizon"
+      <video 
+        src={heroVideo} 
+        autoPlay
+        muted
+        loop
+        playsInline
         className="absolute inset-0 w-full h-full object-cover grayscale"
       />
       <div className="hero-overlay" />
