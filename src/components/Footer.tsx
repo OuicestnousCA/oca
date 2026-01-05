@@ -138,8 +138,8 @@ const Footer = () => {
             <h4 className="font-display text-lg tracking-wide mb-4">Stay Connected</h4>
             <div className="flex items-center gap-3">
               <a 
-                href="https://instagram.com" 
-                target="_blank" 
+                href="https://www.instagram.com/ouicestnousca/" 
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all"
                 aria-label="Instagram"
