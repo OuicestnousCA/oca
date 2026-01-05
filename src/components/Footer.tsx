@@ -147,8 +147,8 @@ const Footer = () => {
                 <Instagram className="w-4 h-4" />
               </a>
               <a 
-                href="https://tiktok.com" 
-                target="_blank" 
+                href="https://www.tiktok.com/@ouicestnousca?is_from_webapp=1&sender_device=pc" 
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all"
                 aria-label="TikTok"
