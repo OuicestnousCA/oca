@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Heart, ShoppingBag } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
@@ -15,10 +15,27 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const { isInWishlist, toggleWishlist } = useWishlist();
   const [hoveredColor, setHoveredColor] = useState<ColorVariant | null>(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   const isWishlisted = isInWishlist(product.id);
   
-  const displayImage = hoveredColor?.image || product.image;
+  // Check if product has unique images (not all the same)
+  const hasUniqueImages = product.images.length > 1 && 
+    new Set(product.images).size > 1;
+  
+  // Auto-slide effect for products with multiple unique images
+  useEffect(() => {
+    if (!hasUniqueImages) return;
+    
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
+    }, 3000);
+    
+    return () => clearInterval(interval);
+  }, [hasUniqueImages, product.images.length]);
+  
+  const displayImage = hoveredColor?.image || 
+    (hasUniqueImages ? product.images[currentImageIndex] : product.image);
   
   const discountPercentage = product.originalPrice 
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
@@ -66,13 +83,52 @@ const ProductCard = ({ product }: ProductCardProps) => {
     >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden bg-secondary">
-        {/* Main Product Image */}
-        <img 
-          src={displayImage} 
-          alt={product.name}
-          className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105"
-          loading="lazy"
-        />
+        {/* Image Slider */}
+        {hasUniqueImages ? (
+          <div className="relative w-full h-full">
+            {product.images.map((img, index) => (
+              <img 
+                key={index}
+                src={hoveredColor?.image || img} 
+                alt={`${product.name} - View ${index + 1}`}
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
+                  index === currentImageIndex 
+                    ? "opacity-100 translate-x-0" 
+                    : index < currentImageIndex 
+                      ? "opacity-0 -translate-x-full" 
+                      : "opacity-0 translate-x-full"
+                }`}
+                loading="lazy"
+              />
+            ))}
+            
+            {/* Slide Indicators */}
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
+              {product.images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImageIndex(index);
+                  }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                    index === currentImageIndex 
+                      ? "bg-foreground w-4" 
+                      : "bg-foreground/40 hover:bg-foreground/60"
+                  }`}
+                  aria-label={`View image ${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <img 
+            src={displayImage} 
+            alt={product.name}
+            className="w-full h-full object-cover transition-all duration-500 ease-out group-hover:scale-105"
+            loading="lazy"
+          />
+        )}
 
         {/* Top Icons */}
         <div className="absolute top-3 left-3 right-3 flex justify-between items-start z-10">
@@ -104,13 +160,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
         {/* Discount Badge */}
         {product.isOnSale && discountPercentage > 0 && (
-          <span className="absolute bottom-3 left-3 px-2 py-1 text-xs font-semibold bg-background text-foreground">
+          <span className="absolute bottom-3 left-3 px-2 py-1 text-xs font-semibold bg-background text-foreground z-10">
             -{discountPercentage}%
           </span>
         )}
 
         {/* Color Swatches on Hover */}
-        {isHovered && product.colors.length > 1 && (
+        {isHovered && product.colors.length > 1 && !hasUniqueImages && (
           <div 
             className="absolute bottom-3 right-3 flex gap-1.5 animate-fade-in"
             onClick={(e) => e.stopPropagation()}

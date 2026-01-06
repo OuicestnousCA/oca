@@ -3,7 +3,9 @@ import hoodieBlack from "@/assets/products/hoodie-black.jpg";
 import teePink from "@/assets/products/tee-pink.jpg";
 import jerseyWhite from "@/assets/products/jersey-white.jpg";
 import jerseyBlack from "@/assets/products/jersey-black.jpg";
-import pufferBlue from "@/assets/products/puffer-blue.jpg";
+import pufferBlue1 from "@/assets/products/puffer-blue-1.png";
+import pufferBlue2 from "@/assets/products/puffer-blue-2.png";
+import pufferBlue3 from "@/assets/products/puffer-blue-3.png";
 import capPink from "@/assets/products/cap-pink.jpg";
 import shortsBlack from "@/assets/products/shorts-black.jpg";
 import teeBlack from "@/assets/products/tee-black.jpg";
@@ -142,15 +144,15 @@ export const products: Product[] = [
     id: 5,
     name: "Bleu O Puffer Jacket",
     price: 799.99,
-    image: pufferBlue,
-    images: [pufferBlue, pufferBlue, pufferBlue],
+    image: pufferBlue1,
+    images: [pufferBlue1, pufferBlue2, pufferBlue3],
     isOnSale: false,
     isSelling: false,
     category: "Outerwear",
     colors: [
-      { name: "Blue", hex: "#3a6ea5", image: pufferBlue },
-      { name: "Black", hex: "#1a1a1a", image: pufferBlue },
-      { name: "Olive", hex: "#556b2f", image: pufferBlue },
+      { name: "Blue", hex: "#3a6ea5", image: pufferBlue1 },
+      { name: "Black", hex: "#1a1a1a", image: pufferBlue1 },
+      { name: "Olive", hex: "#556b2f", image: pufferBlue1 },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     description: "Insulated puffer jacket with premium down filling. Features a water-resistant shell and adjustable hood for ultimate protection.",
