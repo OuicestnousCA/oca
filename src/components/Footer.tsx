@@ -124,12 +124,18 @@ const Footer = () => {
               <Link to="/contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                 Contact
               </Link>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-                Shipping Info
-              </a>
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-                Returns
-              </a>
+              <Link to="/auth" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                My Account
+              </Link>
+              <Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                Terms and Conditions
+              </Link>
+              <Link to="/refund-policy" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                Refund and Returns Policy
+              </Link>
+              <Link to="/privacy-policy" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                Privacy Policy
+              </Link>
             </nav>
           </div>
 
