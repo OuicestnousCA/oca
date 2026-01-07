@@ -151,8 +151,6 @@ export const products: Product[] = [
     category: "Outerwear",
     colors: [
       { name: "Blue", hex: "#3a6ea5", image: pufferBlue1 },
-      { name: "Black", hex: "#1a1a1a", image: pufferBlue1 },
-      { name: "Olive", hex: "#556b2f", image: pufferBlue1 },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     description: "Insulated puffer jacket with premium down filling. Features a water-resistant shell and adjustable hood for ultimate protection.",

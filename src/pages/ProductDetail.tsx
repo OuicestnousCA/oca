@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ChevronLeft, Heart, Minus, Plus, Star, Truck, RotateCcw, Shield } from "lucide-react";
@@ -26,6 +26,21 @@ const ProductDetail = () => {
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
 
   const isWishlisted = product ? isInWishlist(product.id) : false;
+
+  // Get unique images for the carousel
+  const uniqueImages = product ? [...new Set(product.images)] : [];
+  const hasMultipleImages = uniqueImages.length > 1;
+
+  // Auto-slide effect for products with multiple unique images
+  useEffect(() => {
+    if (!hasMultipleImages) return;
+
+    const interval = setInterval(() => {
+      setSelectedImageIndex((prev) => (prev + 1) % uniqueImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [hasMultipleImages, uniqueImages.length]);
 
   const handleToggleWishlist = () => {
     if (!product) return;
@@ -83,7 +98,7 @@ const ProductDetail = () => {
     setZoomPosition({ x, y });
   };
 
-  const displayImage = selectedColor?.image || product.image;
+  const displayImage = hasMultipleImages ? uniqueImages[selectedImageIndex] : (selectedColor?.image || product.image);
 
   return (
     <>
@@ -138,25 +153,27 @@ const ProductDetail = () => {
               </div>
 
               {/* Thumbnail Gallery */}
-              <div className="flex gap-3 overflow-x-auto pb-2">
-                {product.images.map((img, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setSelectedImageIndex(index)}
-                    className={`flex-shrink-0 w-20 h-20 bg-secondary overflow-hidden border-2 transition-all ${
-                      selectedImageIndex === index 
-                        ? "border-foreground" 
-                        : "border-transparent hover:border-muted-foreground"
-                    }`}
-                  >
-                    <img 
-                      src={img} 
-                      alt={`${product.name} view ${index + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                  </button>
-                ))}
-              </div>
+              {uniqueImages.length > 1 && (
+                <div className="flex gap-3 overflow-x-auto pb-2">
+                  {uniqueImages.map((img, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`flex-shrink-0 w-20 h-20 bg-secondary overflow-hidden border-2 transition-all ${
+                        selectedImageIndex === index 
+                          ? "border-foreground" 
+                          : "border-transparent hover:border-muted-foreground"
+                      }`}
+                    >
+                      <img 
+                        src={img} 
+                        alt={`${product.name} view ${index + 1}`}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {/* Product Info */}
