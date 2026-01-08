@@ -1,6 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Instagram, User, Search, ShoppingBag, Heart, Menu, X, LogOut, Package, Shield } from "lucide-react";
+import { products } from "@/data/products";
+import { Input } from "@/components/ui/input";
 import logo from "@/assets/logo.png";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
@@ -16,16 +18,40 @@ import {
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const searchRef = useRef<HTMLDivElement>(null);
   const { totalItems, openCart } = useCart();
   const { totalItems: wishlistItems, openWishlist } = useWishlist();
   const { user, signOut } = useAuth();
   const { isAdmin } = useAdminCheck();
   const navigate = useNavigate();
 
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    product.category.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   const handleSignOut = async () => {
     await signOut();
     navigate("/");
   };
+
+  const handleProductClick = (productId: number) => {
+    setIsSearchOpen(false);
+    setSearchQuery("");
+    navigate(`/product/${productId}`);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setIsSearchOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -70,9 +96,55 @@ const Header = () => {
 
         {/* Icons */}
         <div className="flex items-center gap-1">
-          <button className="icon-btn hidden md:flex" aria-label="Search">
-            <Search className="w-5 h-5" />
-          </button>
+          <div className="relative hidden md:block" ref={searchRef}>
+            <button 
+              className="icon-btn" 
+              aria-label="Search"
+              onClick={() => setIsSearchOpen(!isSearchOpen)}
+            >
+              <Search className="w-5 h-5" />
+            </button>
+            
+            {isSearchOpen && (
+              <div className="absolute right-0 top-full mt-2 w-80 bg-background border border-border shadow-lg z-50">
+                <div className="p-3">
+                  <Input
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    autoFocus
+                    className="w-full"
+                  />
+                </div>
+                {searchQuery && (
+                  <div className="max-h-80 overflow-y-auto border-t border-border">
+                    {filteredProducts.length > 0 ? (
+                      filteredProducts.map((product) => (
+                        <button
+                          key={product.id}
+                          onClick={() => handleProductClick(product.id)}
+                          className="w-full flex items-center gap-3 p-3 hover:bg-muted transition-colors text-left"
+                        >
+                          <img
+                            src={product.images[0]}
+                            alt={product.name}
+                            className="w-12 h-12 object-cover"
+                          />
+                          <div>
+                            <p className="font-medium text-sm">{product.name}</p>
+                            <p className="text-xs text-muted-foreground">R{product.price.toFixed(2)}</p>
+                          </div>
+                        </button>
+                      ))
+                    ) : (
+                      <p className="p-3 text-sm text-muted-foreground">No products found</p>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
           
           {user ? (
             <DropdownMenu>
