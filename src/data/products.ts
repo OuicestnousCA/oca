@@ -8,7 +8,8 @@ import pufferBlue2 from "@/assets/products/puffer-blue-2.png";
 import pufferBlue3 from "@/assets/products/puffer-blue-3.png";
 import capPink from "@/assets/products/cap-pink.jpg";
 import shortsBlack from "@/assets/products/shorts-black.jpg";
-import teeBlack from "@/assets/products/tee-black.jpg";
+import dtsTeeBlack1 from "@/assets/products/dts-tee-black-1.png";
+import dtsTeeBlack2 from "@/assets/products/dts-tee-black-2.png";
 import tankPink1 from "@/assets/products/tank-pink-1.jpg";
 import tankPink2 from "@/assets/products/tank-pink-2.jpg";
 
@@ -223,15 +224,14 @@ export const products: Product[] = [
     id: 8,
     name: "DTS O Tee",
     price: 399.99,
-    image: teeBlack,
-    images: [teeBlack, teeBlack, teeBlack],
+    image: dtsTeeBlack1,
+    images: [dtsTeeBlack1, dtsTeeBlack2],
     isOnSale: false,
     isSelling: false,
     category: "T-Shirts",
     colors: [
-      { name: "Black", hex: "#1a1a1a", image: teeBlack },
-      { name: "White", hex: "#ffffff", image: teeBlack },
-      { name: "Grey", hex: "#6b6b6b", image: teeBlack },
+      { name: "Black", hex: "#1a1a1a", image: dtsTeeBlack1 },
+      { name: "White", hex: "#ffffff", image: dtsTeeBlack1 },
     ],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     description: "Elevated basics tee with a structured fit. Premium heavyweight cotton delivers a luxurious feel and lasting durability.",
