@@ -73,7 +73,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   return (
     <article 
-      className="group relative bg-card cursor-pointer w-[250px]"
+      className="group relative bg-card cursor-pointer"
       onClick={handleCardClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => {
@@ -82,7 +82,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       }}
     >
       {/* Image Container */}
-      <div className="relative overflow-hidden bg-secondary" style={{ width: '250px', height: '373px' }}>
+      <div className="relative aspect-square overflow-hidden bg-secondary">
         {/* Image Slider */}
         {hasUniqueImages ? (
           <div className="relative w-full h-full">
