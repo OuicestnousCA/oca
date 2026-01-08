@@ -9,6 +9,8 @@ import pufferBlue3 from "@/assets/products/puffer-blue-3.png";
 import capPink from "@/assets/products/cap-pink.jpg";
 import shortsBlack from "@/assets/products/shorts-black.jpg";
 import teeBlack from "@/assets/products/tee-black.jpg";
+import tankPink1 from "@/assets/products/tank-pink-1.jpg";
+import tankPink2 from "@/assets/products/tank-pink-2.jpg";
 
 export interface ColorVariant {
   name: string;
@@ -242,6 +244,30 @@ export const products: Product[] = [
       "Garment-dyed"
     ],
     reviews: { rating: 4.8, count: 178 }
+  },
+  {
+    id: 9,
+    name: "LA Tank Top",
+    price: 399.99,
+    image: tankPink1,
+    images: [tankPink1, tankPink2],
+    isOnSale: false,
+    isSelling: false,
+    category: "T-Shirts",
+    colors: [
+      { name: "Pink", hex: "#c77dba", image: tankPink1 },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    description: "Bold statement tank top with unique graphic design. Perfect for workouts or casual streetwear style.",
+    details: [
+      "100% Cotton",
+      "Relaxed fit",
+      "Sleeveless design",
+      "Graphic print front and back",
+      "Soft hand feel",
+      "Machine washable"
+    ],
+    reviews: { rating: 4.6, count: 32 }
   },
 ];
 
