@@ -3,8 +3,8 @@ import { products } from "@/data/products";
 
 const ProductGrid = () => {
   return (
-    <section id="products" className="py-16 md:py-24">
-      <div className="container">
+    <section id="products" className="py-16 md:py-24 px-4 md:px-8 lg:px-12">
+      <div className="max-w-[1800px] mx-auto">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
           <p className="text-muted-foreground">
             Showing all {products.length} results
