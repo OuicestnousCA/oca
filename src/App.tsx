@@ -20,6 +20,7 @@ import Orders from "./pages/Orders";
 import MyAccount from "./pages/MyAccount";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ const App = () => (
                     <Route path="/orders" element={<Orders />} />
                     <Route path="/my-account" element={<MyAccount />} />
                     <Route path="/admin" element={<Admin />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
