@@ -20,6 +20,7 @@ import Orders from "./pages/Orders";
 import MyAccount from "./pages/MyAccount";
 import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
+import TermsAndConditions from "./pages/TermsAndConditions";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import RefundPolicy from "./pages/RefundPolicy";
 
@@ -50,6 +51,7 @@ const App = () => (
                     <Route path="/admin" element={<Admin />} />
                     <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                     <Route path="/refund-policy" element={<RefundPolicy />} />
+                    <Route path="/terms" element={<TermsAndConditions />} />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route path="*" element={<NotFound />} />
                   </Routes>
