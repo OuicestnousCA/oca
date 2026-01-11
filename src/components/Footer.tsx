@@ -53,7 +53,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Support Column */}
           <div>
-            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-primary">Support</h4>
+            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-white">Support</h4>
             <nav className="flex flex-col gap-2">
               <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Contact Us
@@ -75,7 +75,7 @@ const Footer = () => {
 
           {/* Services Column */}
           <div>
-            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-primary">Services</h4>
+            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-white">Services</h4>
             <nav className="flex flex-col gap-2">
               <Link to="/track-order" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Track Your Order
@@ -88,7 +88,7 @@ const Footer = () => {
 
           {/* About Column */}
           <div>
-            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-primary">About Us</h4>
+            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-white">About Us</h4>
             <nav className="flex flex-col gap-2">
               <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Home
@@ -101,7 +101,7 @@ const Footer = () => {
 
           {/* Stay Up to Date Column */}
           <div>
-            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-primary">Stay Up To Date</h4>
+            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-white">Stay Up To Date</h4>
             <p className="text-gray-300 text-sm mb-4">Sign up and get 15% OFF on your first purchase!</p>
             
             <form onSubmit={handleSubscribe} className="flex gap-0 mb-6">
@@ -180,7 +180,7 @@ const Footer = () => {
               <div className="border border-gray-600 p-2">
                 <img src={logo} alt="OUICESTNOUS" className="h-8 w-auto invert" />
               </div>
-              <span className="text-xs text-primary uppercase tracking-wider">Authentic Streetwear</span>
+              <span className="text-xs text-white uppercase tracking-wider">Authentic Streetwear</span>
             </div>
           </div>
         </div>
@@ -192,10 +192,10 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Left - Legal Links */}
             <div className="flex flex-wrap items-center gap-4 text-xs">
-              <Link to="/terms" className="text-primary hover:text-white transition-colors">
+              <Link to="/terms" className="text-gray-300 hover:text-white transition-colors">
                 Terms & Conditions
               </Link>
-              <Link to="/privacy-policy" className="text-primary hover:text-white transition-colors">
+              <Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
             </div>
