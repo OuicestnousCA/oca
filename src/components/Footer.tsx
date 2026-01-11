@@ -127,6 +127,9 @@ const Footer = () => {
               <Link to="/my-account" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                 My Account
               </Link>
+              <Link to="/track-order" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+                Track Order
+              </Link>
               <Link to="/terms" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
                 Terms and Conditions
               </Link>
