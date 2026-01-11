@@ -47,27 +47,27 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-white text-black">
+    <footer className="bg-[#1a1a1a] text-white">
       {/* Main Footer */}
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Support Column */}
           <div>
-            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-black font-semibold">Support</h4>
+            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-primary">Support</h4>
             <nav className="flex flex-col gap-2">
-              <Link to="/contact" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Contact Us
               </Link>
-              <Link to="/shipping-policy" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/shipping-policy" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Delivery Options
               </Link>
-              <Link to="/refund-policy" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/refund-policy" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Returns
               </Link>
-              <Link to="/privacy-policy" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/privacy-policy" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Privacy Policy
               </Link>
-              <Link to="/terms" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/terms" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Terms & Conditions
               </Link>
             </nav>
@@ -75,12 +75,12 @@ const Footer = () => {
 
           {/* Services Column */}
           <div>
-            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-black font-semibold">Services</h4>
+            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-primary">Services</h4>
             <nav className="flex flex-col gap-2">
-              <Link to="/track-order" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/track-order" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Track Your Order
               </Link>
-              <Link to="/my-account" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/my-account" className="text-gray-300 hover:text-white transition-colors text-sm">
                 My Account
               </Link>
             </nav>
@@ -88,12 +88,12 @@ const Footer = () => {
 
           {/* About Column */}
           <div>
-            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-black font-semibold">About Us</h4>
+            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-primary">About Us</h4>
             <nav className="flex flex-col gap-2">
-              <Link to="/" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Home
               </Link>
-              <Link to="/contact" className="text-gray-700 hover:text-black transition-colors text-sm">
+              <Link to="/contact" className="text-gray-300 hover:text-white transition-colors text-sm">
                 Contact
               </Link>
             </nav>
@@ -101,8 +101,8 @@ const Footer = () => {
 
           {/* Stay Up to Date Column */}
           <div>
-            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-black font-semibold">Stay Up To Date</h4>
-            <p className="text-gray-700 text-sm mb-4">Sign up and get 15% OFF on your first purchase!</p>
+            <h4 className="font-display text-sm tracking-wide uppercase mb-4 text-primary">Stay Up To Date</h4>
+            <p className="text-gray-300 text-sm mb-4">Sign up and get 15% OFF on your first purchase!</p>
             
             <form onSubmit={handleSubscribe} className="flex gap-0 mb-6">
               <input 
@@ -110,13 +110,13 @@ const Footer = () => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email"
-                className="flex-1 bg-gray-100 text-black border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                className="flex-1 bg-white text-black border-0 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary"
                 disabled={isSubmitting}
               />
               <button 
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-black text-white px-5 py-2.5 text-sm font-medium hover:bg-gray-800 transition-colors disabled:opacity-50"
+                className="bg-black text-white border border-white px-5 py-2.5 text-sm font-medium hover:bg-white hover:text-black transition-colors disabled:opacity-50"
               >
                 {isSubmitting ? "..." : "SIGN UP"}
               </button>
@@ -128,7 +128,7 @@ const Footer = () => {
                 href="https://facebook.com" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black hover:text-gray-600 transition-colors"
+                className="text-white hover:text-primary transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook className="w-5 h-5" />
@@ -137,7 +137,7 @@ const Footer = () => {
                 href="https://x.com" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black hover:text-gray-600 transition-colors"
+                className="text-white hover:text-primary transition-colors"
                 aria-label="X (Twitter)"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -148,7 +148,7 @@ const Footer = () => {
                 href="https://www.instagram.com/ouicestnousca/" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black hover:text-gray-600 transition-colors"
+                className="text-white hover:text-primary transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-5 h-5" />
@@ -157,7 +157,7 @@ const Footer = () => {
                 href="https://www.tiktok.com/@ouicestnousca?is_from_webapp=1&sender_device=pc" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black hover:text-gray-600 transition-colors"
+                className="text-white hover:text-primary transition-colors"
                 aria-label="TikTok"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
@@ -168,7 +168,7 @@ const Footer = () => {
                 href="https://youtube.com" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-black hover:text-gray-600 transition-colors"
+                className="text-white hover:text-primary transition-colors"
                 aria-label="YouTube"
               >
                 <Youtube className="w-5 h-5" />
@@ -177,46 +177,46 @@ const Footer = () => {
 
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="border border-gray-300 p-2">
-                <img src={logo} alt="OUICESTNOUS" className="h-8 w-auto" />
+              <div className="border border-gray-600 p-2">
+                <img src={logo} alt="OUICESTNOUS" className="h-8 w-auto invert" />
               </div>
-              <span className="text-xs text-black uppercase tracking-wider">Authentic Streetwear</span>
+              <span className="text-xs text-primary uppercase tracking-wider">Authentic Streetwear</span>
             </div>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-gray-200">
+      <div className="border-t border-gray-700">
         <div className="container py-4">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             {/* Left - Legal Links */}
             <div className="flex flex-wrap items-center gap-4 text-xs">
-              <Link to="/terms" className="text-gray-700 hover:text-black transition-colors">
+              <Link to="/terms" className="text-primary hover:text-white transition-colors">
                 Terms & Conditions
               </Link>
-              <Link to="/privacy-policy" className="text-gray-700 hover:text-black transition-colors">
+              <Link to="/privacy-policy" className="text-primary hover:text-white transition-colors">
                 Privacy Policy
               </Link>
             </div>
 
             {/* Center - Copyright */}
-            <p className="text-gray-600 text-xs">
+            <p className="text-gray-400 text-xs">
               ©OUICESTNOUS, {new Date().getFullYear()}. All Rights Reserved
             </p>
 
             {/* Right - Payment Methods */}
             <div className="flex items-center gap-2">
-              <div className="bg-gray-100 rounded px-2 py-1 border border-gray-300">
+              <div className="bg-white rounded px-2 py-1">
                 <span className="text-blue-800 font-bold text-xs">VISA</span>
               </div>
-              <div className="bg-gray-100 rounded px-2 py-1 border border-gray-300">
+              <div className="bg-white rounded px-2 py-1">
                 <span className="text-orange-500 font-bold text-xs">MC</span>
               </div>
-              <div className="bg-gray-100 rounded px-2 py-1 border border-gray-300">
+              <div className="bg-white rounded px-2 py-1">
                 <span className="text-blue-600 font-bold text-[8px]">AMEX</span>
               </div>
-              <div className="bg-gray-100 rounded px-2 py-1 border border-gray-300">
+              <div className="bg-white rounded px-2 py-1">
                 <span className="text-blue-700 font-bold text-[8px]">DINERS</span>
               </div>
             </div>
