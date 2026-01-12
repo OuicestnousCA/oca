@@ -2,7 +2,9 @@
 import hoodieBlack1 from "@/assets/products/hoodie-black-1.png";
 import hoodieBlack2 from "@/assets/products/hoodie-black-2.png";
 import hoodieBlack3 from "@/assets/products/hoodie-black-3.png";
-import teePink from "@/assets/products/tee-pink.jpg";
+import teePink1 from "@/assets/products/tee-pink-1.jpg";
+import teePink2 from "@/assets/products/tee-pink-2.jpg";
+import teePink3 from "@/assets/products/tee-pink-3.jpg";
 import jerseyWhite from "@/assets/products/jersey-white.jpg";
 import jerseyBlack from "@/assets/products/jersey-black.jpg";
 import pufferBlue1 from "@/assets/products/puffer-blue-1.png";
@@ -73,15 +75,15 @@ export const products: Product[] = [
     id: 2,
     name: "1999 O Pink Tee",
     price: 299.99,
-    image: teePink,
-    images: [teePink, teePink, teePink],
+    image: teePink1,
+    images: [teePink1, teePink2, teePink3],
     isOnSale: false,
     isSelling: false,
     category: "T-Shirts",
     colors: [
-      { name: "Pink", hex: "#e8a0b5", image: teePink },
-      { name: "White", hex: "#ffffff", image: teePink },
-      { name: "Black", hex: "#1a1a1a", image: teePink },
+      { name: "Pink", hex: "#e8a0b5", image: teePink1 },
+      { name: "White", hex: "#ffffff", image: teePink1 },
+      { name: "Black", hex: "#1a1a1a", image: teePink1 },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     description: "Vintage-inspired graphic tee with a soft hand feel. The relaxed silhouette and premium cotton blend make it perfect for everyday wear.",
