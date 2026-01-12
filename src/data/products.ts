@@ -11,7 +11,8 @@ import pufferBlue1 from "@/assets/products/puffer-blue-1.png";
 import pufferBlue2 from "@/assets/products/puffer-blue-2.png";
 import pufferBlue3 from "@/assets/products/puffer-blue-3.png";
 import capPink from "@/assets/products/cap-pink.jpg";
-import shortsBlack from "@/assets/products/shorts-black.jpg";
+import shortsBlack1 from "@/assets/products/shorts-black-1.jpg";
+import shortsBlack2 from "@/assets/products/shorts-black-2.jpg";
 import dtsTeeBlack1 from "@/assets/products/dts-tee-black-1.png";
 import dtsTeeBlack2 from "@/assets/products/dts-tee-black-2.png";
 import tankPink1 from "@/assets/products/tank-pink-1.jpg";
@@ -203,14 +204,14 @@ export const products: Product[] = [
     name: "Squeeze O Short",
     price: 399.99,
     originalPrice: 499.99,
-    image: shortsBlack,
-    images: [shortsBlack, shortsBlack, shortsBlack],
+    image: shortsBlack1,
+    images: [shortsBlack1, shortsBlack2],
     isOnSale: true,
     isSelling: true,
     category: "Bottoms",
     colors: [
-      { name: "Black", hex: "#1a1a1a", image: shortsBlack },
-      { name: "Grey", hex: "#6b6b6b", image: shortsBlack },
+      { name: "Black", hex: "#1a1a1a", image: shortsBlack1 },
+      { name: "Grey", hex: "#6b6b6b", image: shortsBlack1 },
     ],
     sizes: ["XS", "S", "M", "L", "XL"],
     description: "Athletic shorts with built-in compression liner. Designed for high-performance training with moisture management.",
