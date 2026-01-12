@@ -1,5 +1,7 @@
 // Product images
-import hoodieBlack from "@/assets/products/hoodie-black.jpg";
+import hoodieBlack1 from "@/assets/products/hoodie-black-1.png";
+import hoodieBlack2 from "@/assets/products/hoodie-black-2.png";
+import hoodieBlack3 from "@/assets/products/hoodie-black-3.png";
 import teePink from "@/assets/products/tee-pink.jpg";
 import jerseyWhite from "@/assets/products/jersey-white.jpg";
 import jerseyBlack from "@/assets/products/jersey-black.jpg";
@@ -45,15 +47,15 @@ export const products: Product[] = [
     name: "YBY O Hoodie",
     price: 499.99,
     originalPrice: 699.99,
-    image: hoodieBlack,
-    images: [hoodieBlack, hoodieBlack, hoodieBlack],
+    image: hoodieBlack1,
+    images: [hoodieBlack1, hoodieBlack2, hoodieBlack3],
     isOnSale: true,
     isSelling: true,
     category: "Hoodies",
     colors: [
-      { name: "Black", hex: "#1a1a1a", image: hoodieBlack },
-      { name: "Charcoal", hex: "#3d3d3d", image: hoodieBlack },
-      { name: "Navy", hex: "#1e3a5f", image: hoodieBlack },
+      { name: "Black", hex: "#1a1a1a", image: hoodieBlack1 },
+      { name: "Charcoal", hex: "#3d3d3d", image: hoodieBlack1 },
+      { name: "Navy", hex: "#1e3a5f", image: hoodieBlack1 },
     ],
     sizes: ["XS", "S", "M", "L", "XL", "XXL"],
     description: "Premium heavyweight hoodie crafted from 100% organic cotton. Features a relaxed fit with ribbed cuffs and hem for comfort and durability.",
