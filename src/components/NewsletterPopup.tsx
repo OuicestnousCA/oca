@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import logo from "@/assets/logo.png";
 
 const NewsletterPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -85,9 +86,14 @@ const NewsletterPopup = () => {
           <span className="sr-only">Close</span>
         </button>
         
-        <div className="p-8 text-center">
-          <DialogHeader className="mb-6">
-            <DialogTitle className="text-2xl font-display uppercase tracking-wider text-white">
+        <div className="p-8 text-center flex flex-col items-center">
+          {/* Brand Logo */}
+          <div className="mb-6">
+            <img src={logo} alt="OUICESTNOUS" className="h-12 w-auto invert" />
+          </div>
+          
+          <DialogHeader className="mb-6 w-full flex flex-col items-center">
+            <DialogTitle className="text-2xl font-display uppercase tracking-wider text-white text-center">
               Get 15% Off
             </DialogTitle>
           </DialogHeader>
