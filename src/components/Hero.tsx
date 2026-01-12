@@ -16,8 +16,8 @@ const Hero = () => {
         <h1 className="font-display text-5xl md:text-7xl lg:text-8xl tracking-wider text-foreground animate-fade-up">
           OUI C'EST NOUS
         </h1>
-        <p className="mt-4 text-lg md:text-xl text-muted-foreground animate-fade-up" style={{ animationDelay: '0.1s' }}>
-          Streetwear from the heart
+        <p className="mt-4 text-sm md:text-base tracking-[0.3em] uppercase text-muted-foreground animate-fade-up font-medium" style={{ animationDelay: '0.1s' }}>
+          AUTHENTIC STREETWEAR
         </p>
         <div className="mt-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
           <a href="#products" className="btn-primary">
