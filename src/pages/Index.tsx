@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import ProductGrid from "@/components/ProductGrid";
 import Footer from "@/components/Footer";
 import ThemeToggle from "@/components/ThemeToggle";
+import NewsletterPopup from "@/components/NewsletterPopup";
 
 const Index = () => {
   return (
@@ -28,6 +29,7 @@ const Index = () => {
         </main>
         <Footer />
         <ThemeToggle />
+        <NewsletterPopup />
       </div>
     </>
   );
