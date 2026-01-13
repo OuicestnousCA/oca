@@ -6,7 +6,9 @@ import teePink1 from "@/assets/products/tee-pink-1.jpg";
 import teePink2 from "@/assets/products/tee-pink-2.jpg";
 import teePink3 from "@/assets/products/tee-pink-3.jpg";
 import jerseyWhite from "@/assets/products/jersey-white.jpg";
-import jerseyBlack from "@/assets/products/jersey-black.jpg";
+import jerseyBlack1 from "@/assets/products/jersey-black-1.png";
+import jerseyBlack2 from "@/assets/products/jersey-black-2.png";
+import jerseyBlack3 from "@/assets/products/jersey-black-3.png";
 import pufferBlue1 from "@/assets/products/puffer-blue-1.png";
 import pufferBlue2 from "@/assets/products/puffer-blue-2.png";
 import pufferBlue3 from "@/assets/products/puffer-blue-3.png";
@@ -109,7 +111,7 @@ export const products: Product[] = [
     category: "Jerseys",
     colors: [
       { name: "White", hex: "#ffffff", image: jerseyWhite },
-      { name: "Black", hex: "#1a1a1a", image: jerseyBlack },
+      { name: "Black", hex: "#1a1a1a", image: jerseyBlack1 },
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
     description: "Official team jersey featuring moisture-wicking technology. Designed for performance with breathable mesh panels.",
@@ -127,13 +129,13 @@ export const products: Product[] = [
     id: 4,
     name: "BTL OFC Jersey Black",
     price: 399.99,
-    image: jerseyBlack,
-    images: [jerseyBlack, jerseyBlack, jerseyBlack],
+    image: jerseyBlack1,
+    images: [jerseyBlack1, jerseyBlack2, jerseyBlack3],
     isOnSale: false,
     isSelling: false,
     category: "Jerseys",
     colors: [
-      { name: "Black", hex: "#1a1a1a", image: jerseyBlack },
+      { name: "Black", hex: "#1a1a1a", image: jerseyBlack1 },
       { name: "White", hex: "#ffffff", image: jerseyWhite },
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
