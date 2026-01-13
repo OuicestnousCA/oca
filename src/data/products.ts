@@ -12,7 +12,9 @@ import jerseyBlack3 from "@/assets/products/jersey-black-3.png";
 import pufferBlue1 from "@/assets/products/puffer-blue-1.png";
 import pufferBlue2 from "@/assets/products/puffer-blue-2.png";
 import pufferBlue3 from "@/assets/products/puffer-blue-3.png";
-import capPink from "@/assets/products/cap-pink.jpg";
+import capPink1 from "@/assets/products/cap-pink-1.jpg";
+import capPink2 from "@/assets/products/cap-pink-2.jpg";
+import capPink3 from "@/assets/products/cap-pink-3.jpg";
 import shortsBlack1 from "@/assets/products/shorts-black-1.jpg";
 import shortsBlack2 from "@/assets/products/shorts-black-2.jpg";
 import dtsTeeBlack1 from "@/assets/products/dts-tee-black-1.png";
@@ -179,15 +181,15 @@ export const products: Product[] = [
     name: "OTE Pink Trucker Cap",
     price: 199.99,
     originalPrice: 249.99,
-    image: capPink,
-    images: [capPink, capPink, capPink],
+    image: capPink1,
+    images: [capPink1, capPink2, capPink3],
     isOnSale: true,
     isSelling: false,
     category: "Accessories",
     colors: [
-      { name: "Pink", hex: "#e8a0b5", image: capPink },
-      { name: "Black", hex: "#1a1a1a", image: capPink },
-      { name: "White", hex: "#ffffff", image: capPink },
+      { name: "Pink", hex: "#e8a0b5", image: capPink1 },
+      { name: "Black", hex: "#1a1a1a", image: capPink1 },
+      { name: "White", hex: "#ffffff", image: capPink1 },
     ],
     sizes: ["One Size"],
     description: "Classic trucker cap with curved brim and mesh back. Features an adjustable snapback closure for the perfect fit.",
