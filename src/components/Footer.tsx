@@ -165,7 +165,7 @@ const Footer = () => {
                 </svg>
               </a>
               <a 
-                href="https://youtube.com" 
+                href="https://www.youtube.com/channel/UC3PiDqi3Ccfqnon_L8y6TTw" 
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-white hover:text-primary transition-colors"
