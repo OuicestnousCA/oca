@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ChevronLeft, Heart, Minus, Plus, Star, Truck, RotateCcw, Shield } from "lucide-react";
+import { ChevronLeft, ChevronRight, Heart, Minus, Plus, Star, Truck, RotateCcw, Shield } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -24,6 +24,7 @@ const ProductDetail = () => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [isZoomed, setIsZoomed] = useState(false);
   const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+  const touchStartX = useRef<number | null>(null);
 
   const isWishlisted = product ? isInWishlist(product.id) : false;
 
@@ -31,16 +32,40 @@ const ProductDetail = () => {
   const uniqueImages = product ? [...new Set(product.images)] : [];
   const hasMultipleImages = uniqueImages.length > 1;
 
-  // Auto-slide effect for products with multiple unique images
-  useEffect(() => {
-    if (!hasMultipleImages) return;
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
 
-    const interval = setInterval(() => {
-      setSelectedImageIndex((prev) => (prev + 1) % uniqueImages.length);
-    }, 3000);
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || !hasMultipleImages) return;
+    
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        setSelectedImageIndex((prev) => (prev + 1) % uniqueImages.length);
+      } else {
+        setSelectedImageIndex((prev) => 
+          prev === 0 ? uniqueImages.length - 1 : prev - 1
+        );
+      }
+    }
+    
+    touchStartX.current = null;
+  };
 
-    return () => clearInterval(interval);
-  }, [hasMultipleImages, uniqueImages.length]);
+  const handlePrevImage = () => {
+    setSelectedImageIndex((prev) => 
+      prev === 0 ? uniqueImages.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextImage = () => {
+    setSelectedImageIndex((prev) => 
+      (prev + 1) % uniqueImages.length
+    );
+  };
 
   const handleToggleWishlist = () => {
     if (!product) return;
@@ -126,12 +151,14 @@ const ProductDetail = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
             {/* Image Gallery */}
             <div className="space-y-4">
-              {/* Main Image with Zoom */}
+              {/* Main Image with Zoom and Swipe */}
               <div 
                 className="relative aspect-square bg-secondary overflow-hidden cursor-zoom-in"
                 onMouseEnter={() => setIsZoomed(true)}
                 onMouseLeave={() => setIsZoomed(false)}
                 onMouseMove={handleMouseMove}
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
               >
                 <img
                   src={displayImage}
@@ -143,6 +170,26 @@ const ProductDetail = () => {
                     transformOrigin: `${zoomPosition.x}% ${zoomPosition.y}%`
                   } : undefined}
                 />
+                
+                {/* Navigation Arrows */}
+                {hasMultipleImages && (
+                  <>
+                    <button
+                      onClick={handlePrevImage}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-background/80 backdrop-blur-sm transition-all duration-300 hover:bg-background z-10"
+                      aria-label="Previous image"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={handleNextImage}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-background/80 backdrop-blur-sm transition-all duration-300 hover:bg-background z-10"
+                      aria-label="Next image"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
+                  </>
+                )}
                 
                 {/* Discount Badge */}
                 {product.isOnSale && discountPercentage > 0 && (
