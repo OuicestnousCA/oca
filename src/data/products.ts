@@ -5,7 +5,8 @@ import hoodieBlack3 from "@/assets/products/hoodie-black-3.png";
 import teePink1 from "@/assets/products/tee-pink-1.jpg";
 import teePink2 from "@/assets/products/tee-pink-2.jpg";
 import teePink3 from "@/assets/products/tee-pink-3.jpg";
-import jerseyWhite from "@/assets/products/jersey-white.jpg";
+import jerseyWhite1 from "@/assets/products/jersey-white-1.jpg";
+import jerseyWhite2 from "@/assets/products/jersey-white-2.jpg";
 import jerseyBlack1 from "@/assets/products/jersey-black-1.png";
 import jerseyBlack2 from "@/assets/products/jersey-black-2.png";
 import jerseyBlack3 from "@/assets/products/jersey-black-3.png";
@@ -106,13 +107,13 @@ export const products: Product[] = [
     id: 3,
     name: "BTL OFC Jersey White",
     price: 399.99,
-    image: jerseyWhite,
-    images: [jerseyWhite, jerseyWhite, jerseyWhite],
+    image: jerseyWhite1,
+    images: [jerseyWhite1, jerseyWhite2],
     isOnSale: false,
     isSelling: true,
     category: "Jerseys",
     colors: [
-      { name: "White", hex: "#ffffff", image: jerseyWhite },
+      { name: "White", hex: "#ffffff", image: jerseyWhite1 },
       { name: "Black", hex: "#1a1a1a", image: jerseyBlack1 },
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
@@ -138,7 +139,7 @@ export const products: Product[] = [
     category: "Jerseys",
     colors: [
       { name: "Black", hex: "#1a1a1a", image: jerseyBlack1 },
-      { name: "White", hex: "#ffffff", image: jerseyWhite },
+      { name: "White", hex: "#ffffff", image: jerseyWhite1 },
     ],
     sizes: ["S", "M", "L", "XL", "XXL"],
     description: "Official team jersey featuring moisture-wicking technology. Designed for performance with breathable mesh panels.",
