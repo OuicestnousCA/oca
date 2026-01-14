@@ -25,6 +25,8 @@ import tankPink2 from "@/assets/products/tank-pink-2.jpg";
 import wnseHoodieBlue1 from "@/assets/products/wnse-hoodie-blue-1.jpg";
 import wnseHoodieBlue2 from "@/assets/products/wnse-hoodie-blue-2.jpg";
 import wnseHoodieBlue3 from "@/assets/products/wnse-hoodie-blue-3.jpg";
+import hellaTeeBlack1 from "@/assets/products/hella-tee-black-1.jpg";
+import hellaTeeBlack2 from "@/assets/products/hella-tee-black-2.jpg";
 
 export interface ColorVariant {
   name: string;
@@ -307,6 +309,30 @@ export const products: Product[] = [
       "Machine washable"
     ],
     reviews: { rating: 4.7, count: 58 }
+  },
+  {
+    id: 11,
+    name: "Hella O Tee",
+    price: 299.99,
+    image: hellaTeeBlack1,
+    images: [hellaTeeBlack1, hellaTeeBlack2],
+    isOnSale: false,
+    isSelling: true,
+    category: "T-Shirts",
+    colors: [
+      { name: "Black", hex: "#1a1a1a", image: hellaTeeBlack1 },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    description: "Premium Hella graphic tee featuring the signature 'OUIGESTNOUS' print. Made from soft, breathable cotton for all-day comfort.",
+    details: [
+      "100% Cotton",
+      "200gsm fabric weight",
+      "Relaxed fit",
+      "Screen-printed graphic",
+      "Reinforced collar",
+      "Machine washable"
+    ],
+    reviews: { rating: 4.6, count: 42 }
   },
 ];
 
