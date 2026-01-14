@@ -27,6 +27,9 @@ import wnseHoodieBlue2 from "@/assets/products/wnse-hoodie-blue-2.jpg";
 import wnseHoodieBlue3 from "@/assets/products/wnse-hoodie-blue-3.jpg";
 import hellaTeeBlack1 from "@/assets/products/hella-tee-black-1.jpg";
 import hellaTeeBlack2 from "@/assets/products/hella-tee-black-2.jpg";
+import designerHoodiePink1 from "@/assets/products/designer-hoodie-pink-1.jpg";
+import designerHoodiePink2 from "@/assets/products/designer-hoodie-pink-2.jpg";
+import designerHoodiePink3 from "@/assets/products/designer-hoodie-pink-3.jpg";
 
 export interface ColorVariant {
   name: string;
@@ -333,6 +336,31 @@ export const products: Product[] = [
       "Machine washable"
     ],
     reviews: { rating: 4.6, count: 42 }
+  },
+  {
+    id: 12,
+    name: "1999 O Designer Hoodie",
+    price: 499.99,
+    originalPrice: 599.99,
+    image: designerHoodiePink1,
+    images: [designerHoodiePink1, designerHoodiePink2, designerHoodiePink3],
+    isOnSale: true,
+    isSelling: true,
+    category: "Hoodies",
+    colors: [
+      { name: "Pink", hex: "#e8a0b5", image: designerHoodiePink1 },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    description: "Premium designer hoodie featuring the signature butterfly and floral graphic on the back. Crafted from soft cotton with sleeve details.",
+    details: [
+      "100% Cotton",
+      "Heavyweight 380gsm fabric",
+      "Relaxed fit",
+      "Kangaroo pocket",
+      "Graphic print back and sleeves",
+      "Machine washable"
+    ],
+    reviews: { rating: 4.8, count: 76 }
   },
 ];
 
