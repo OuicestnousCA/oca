@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Heart, ShoppingBag } from "lucide-react";
+import { useState, useRef } from "react";
+import { Heart, ShoppingBag, ChevronLeft, ChevronRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "@/contexts/CartContext";
 import { useWishlist } from "@/contexts/WishlistContext";
@@ -16,23 +16,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
   const [hoveredColor, setHoveredColor] = useState<ColorVariant | null>(null);
   const [isHovered, setIsHovered] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const touchStartX = useRef<number | null>(null);
 
   const isWishlisted = isInWishlist(product.id);
   
   // Check if product has unique images (not all the same)
   const hasUniqueImages = product.images.length > 1 && 
     new Set(product.images).size > 1;
-  
-  // Auto-slide effect for products with multiple unique images
-  useEffect(() => {
-    if (!hasUniqueImages) return;
-    
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
-    }, 3000);
-    
-    return () => clearInterval(interval);
-  }, [hasUniqueImages, product.images.length]);
   
   const displayImage = hoveredColor?.image || 
     (hasUniqueImages ? product.images[currentImageIndex] : product.image);
@@ -71,6 +61,45 @@ const ProductCard = ({ product }: ProductCardProps) => {
     navigate(`/product/${product.id}`);
   };
 
+  const handlePrevImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => 
+      prev === 0 ? product.images.length - 1 : prev - 1
+    );
+  };
+
+  const handleNextImage = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setCurrentImageIndex((prev) => 
+      (prev + 1) % product.images.length
+    );
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    
+    const touchEndX = e.changedTouches[0].clientX;
+    const diff = touchStartX.current - touchEndX;
+    
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Swipe left - next image
+        setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
+      } else {
+        // Swipe right - previous image
+        setCurrentImageIndex((prev) => 
+          prev === 0 ? product.images.length - 1 : prev - 1
+        );
+      }
+    }
+    
+    touchStartX.current = null;
+  };
+
   return (
     <article 
       className="group relative bg-card cursor-pointer"
@@ -85,13 +114,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div className="relative aspect-[3/4] overflow-hidden bg-secondary">
         {/* Image Slider */}
         {hasUniqueImages ? (
-          <div className="relative w-full h-full">
+          <div 
+            className="relative w-full h-full"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {product.images.map((img, index) => (
               <img 
                 key={index}
                 src={hoveredColor?.image || img} 
                 alt={`${product.name} - View ${index + 1}`}
-                className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-in-out ${
+                className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ease-in-out ${
                   index === currentImageIndex 
                     ? "opacity-100 translate-x-0" 
                     : index < currentImageIndex 
@@ -101,6 +134,26 @@ const ProductCard = ({ product }: ProductCardProps) => {
                 loading="lazy"
               />
             ))}
+            
+            {/* Navigation Arrows - Show on hover */}
+            {isHovered && (
+              <>
+                <button
+                  onClick={handlePrevImage}
+                  className="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-background/80 backdrop-blur-sm transition-all duration-300 hover:bg-background z-10"
+                  aria-label="Previous image"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </button>
+                <button
+                  onClick={handleNextImage}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center bg-background/80 backdrop-blur-sm transition-all duration-300 hover:bg-background z-10"
+                  aria-label="Next image"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </>
+            )}
             
             {/* Slide Indicators */}
             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-10">
