@@ -22,6 +22,9 @@ import dtsTeeBlack1 from "@/assets/products/dts-tee-black-1.png";
 import dtsTeeBlack2 from "@/assets/products/dts-tee-black-2.png";
 import tankPink1 from "@/assets/products/tank-pink-1.jpg";
 import tankPink2 from "@/assets/products/tank-pink-2.jpg";
+import wnseHoodieBlue1 from "@/assets/products/wnse-hoodie-blue-1.jpg";
+import wnseHoodieBlue2 from "@/assets/products/wnse-hoodie-blue-2.jpg";
+import wnseHoodieBlue3 from "@/assets/products/wnse-hoodie-blue-3.jpg";
 
 export interface ColorVariant {
   name: string;
@@ -278,6 +281,32 @@ export const products: Product[] = [
       "Machine washable"
     ],
     reviews: { rating: 4.6, count: 32 }
+  },
+  {
+    id: 10,
+    name: "WNSE O Hoodie",
+    price: 499.99,
+    originalPrice: 799.99,
+    image: wnseHoodieBlue1,
+    images: [wnseHoodieBlue1, wnseHoodieBlue2, wnseHoodieBlue3],
+    isOnSale: true,
+    isSelling: true,
+    category: "Hoodies",
+    colors: [
+      { name: "Blue", hex: "#2563eb", image: wnseHoodieBlue1 },
+      { name: "Red", hex: "#dc2626", image: wnseHoodieBlue1 },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    description: "Premium WNSE compass hoodie with bold graphic design. Features the signature directional arrows print on the back and sleeve details.",
+    details: [
+      "100% Cotton",
+      "Heavyweight 380gsm fabric",
+      "Relaxed fit",
+      "Full-zip front",
+      "Kangaroo pocket",
+      "Machine washable"
+    ],
+    reviews: { rating: 4.7, count: 58 }
   },
 ];
 
