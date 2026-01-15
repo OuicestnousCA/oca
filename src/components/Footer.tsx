@@ -116,7 +116,7 @@ const Footer = () => {
               <button 
                 type="submit"
                 disabled={isSubmitting}
-                className="bg-black text-white border border-white px-5 py-2.5 text-sm font-medium hover:bg-white hover:text-black transition-colors disabled:opacity-50"
+                className="bg-black text-white border border-white px-5 py-2.5 text-sm font-medium hover:bg-white hover:text-black transition-colors disabled:opacity-50 whitespace-nowrap"
               >
                 {isSubmitting ? "..." : "SIGN UP"}
               </button>
