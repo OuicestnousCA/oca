@@ -244,13 +244,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
       
       {/* Product Info */}
-      <div className="p-4 space-y-1.5">
+      <div className="p-4 space-y-1.5 text-center">
         <h3 className="font-display text-lg tracking-wide leading-tight line-clamp-1">
           {product.name}
         </h3>
         
         {/* Price Row */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <span className={`font-semibold ${product.originalPrice ? "text-[hsl(var(--accent))]" : ""}`}>
             {formatPrice(product.price)}
           </span>
