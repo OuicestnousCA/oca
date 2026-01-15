@@ -196,17 +196,34 @@ const Footer = () => {
 
             {/* Right - Payment Methods */}
             <div className="flex items-center gap-2">
-              <div className="bg-white rounded px-2 py-1">
-                <span className="text-blue-800 font-bold text-xs">VISA</span>
+              {/* Visa */}
+              <div className="bg-white rounded px-2 py-1.5 flex items-center justify-center w-10 h-6">
+                <svg viewBox="0 0 48 16" className="h-3" fill="none">
+                  <path d="M19.5 1.5L17 14.5H13.5L16 1.5H19.5Z" fill="#1A1F71"/>
+                  <path d="M31.5 1.8C30.7 1.5 29.5 1.2 28 1.2C24 1.2 21.2 3.3 21.2 6.3C21.2 8.5 23.2 9.7 24.7 10.5C26.3 11.3 26.8 11.8 26.8 12.5C26.8 13.5 25.6 14 24.5 14C23 14 22.2 13.8 20.9 13.2L20.4 13L19.9 16C21 16.4 22.8 16.8 24.7 16.8C29 16.8 31.7 14.7 31.7 11.5C31.7 9.8 30.6 8.5 28.3 7.4C26.9 6.7 26.1 6.2 26.1 5.5C26.1 4.8 26.9 4.2 28.5 4.2C29.8 4.2 30.8 4.4 31.5 4.7L31.9 4.9L32.4 2L31.5 1.8Z" fill="#1A1F71"/>
+                  <path d="M37.5 1.5C36.7 1.5 36.1 1.7 35.7 2.5L29.5 14.5H34L34.8 12H40L40.5 14.5H44.5L41 1.5H37.5ZM36 9.2C36.3 8.3 37.8 4.2 37.8 4.2C37.8 4.2 38.2 3.1 38.4 2.4L38.7 4.1C38.7 4.1 39.6 8.3 39.8 9.2H36Z" fill="#1A1F71"/>
+                  <path d="M12.5 1.5L8.5 10.5L8 8C7.3 5.7 5.2 3.2 2.8 2L6.5 14.5H11L17 1.5H12.5Z" fill="#1A1F71"/>
+                  <path d="M6.5 1.5H0L0 1.8C5 3 8.3 5.8 9.5 9L8.2 2.5C8 1.8 7.4 1.5 6.5 1.5Z" fill="#F9A51A"/>
+                </svg>
               </div>
-              <div className="bg-white rounded px-2 py-1">
-                <span className="text-orange-500 font-bold text-xs">MC</span>
+              {/* Mastercard */}
+              <div className="bg-[#1A1F36] rounded px-2 py-1.5 flex items-center justify-center w-10 h-6">
+                <svg viewBox="0 0 32 20" className="h-4">
+                  <circle cx="11" cy="10" r="8" fill="#EB001B"/>
+                  <circle cx="21" cy="10" r="8" fill="#F79E1B"/>
+                  <path d="M16 4.5C17.8 6 19 8.3 19 10.8C19 13.3 17.8 15.6 16 17.1C14.2 15.6 13 13.3 13 10.8C13 8.3 14.2 6 16 4.5Z" fill="#FF5F00"/>
+                </svg>
               </div>
-              <div className="bg-white rounded px-2 py-1">
-                <span className="text-blue-600 font-bold text-[8px]">AMEX</span>
+              {/* American Express */}
+              <div className="bg-[#006FCF] rounded px-1.5 py-1.5 flex items-center justify-center w-10 h-6">
+                <span className="text-white font-bold text-[5px] leading-tight text-center">AMERICAN<br/>EXPRESS</span>
               </div>
-              <div className="bg-white rounded px-2 py-1">
-                <span className="text-blue-700 font-bold text-[8px]">DINERS</span>
+              {/* Diners Club */}
+              <div className="bg-white rounded px-1.5 py-1.5 flex items-center justify-center w-10 h-6">
+                <svg viewBox="0 0 24 24" className="h-4">
+                  <circle cx="12" cy="12" r="10" fill="none" stroke="#004A97" strokeWidth="1.5"/>
+                  <path d="M8 7V17M16 7V17" stroke="#004A97" strokeWidth="1.5"/>
+                </svg>
               </div>
             </div>
           </div>
