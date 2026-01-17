@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/contexts/AuthContext";
 
@@ -14,10 +14,12 @@ export const useAdminCheck = (): AdminCheckResult => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const userIdRef = useRef<string | null>(null);
 
   // Server-side verification function that can be called on demand
   const verifyServerSide = useCallback(async (): Promise<boolean> => {
-    if (!user) {
+    const currentUserId = userIdRef.current;
+    if (!currentUserId) {
       return false;
     }
 
@@ -45,9 +47,12 @@ export const useAdminCheck = (): AdminCheckResult => {
       setError(err instanceof Error ? err.message : 'Verification failed');
       return false;
     }
-  }, [user]);
+  }, []);
 
   useEffect(() => {
+    // Update the ref with current user id
+    userIdRef.current = user?.id ?? null;
+
     const checkAdminStatus = async () => {
       setError(null);
       
@@ -102,7 +107,7 @@ export const useAdminCheck = (): AdminCheckResult => {
     };
 
     checkAdminStatus();
-  }, [user, verifyServerSide]);
+  }, [user?.id, verifyServerSide]);
 
   return { isAdmin, loading, error, verifyServerSide };
 };
