@@ -115,8 +115,38 @@ const Checkout = () => {
       }
 
       if (data.data?.authorization_url) {
-        // Redirect to Paystack payment page
-        window.location.href = data.data.authorization_url;
+        // Validate the authorization URL domain before redirecting
+        try {
+          const url = new URL(data.data.authorization_url);
+          const allowedDomains = ['paystack.co', 'paystack.com'];
+          
+          // Check if hostname ends with allowed domain
+          const isAllowed = allowedDomains.some(domain => 
+            url.hostname === domain || url.hostname.endsWith(`.${domain}`)
+          );
+          
+          if (!isAllowed) {
+            console.error('[SECURITY] Invalid payment domain:', url.hostname);
+            throw new Error('Invalid payment provider URL');
+          }
+          
+          if (url.protocol !== 'https:') {
+            console.error('[SECURITY] Payment URL must use HTTPS');
+            throw new Error('Insecure payment URL');
+          }
+          
+          console.log('[SECURITY] Redirecting to verified payment URL:', url.hostname);
+          window.location.href = data.data.authorization_url;
+        } catch (urlError) {
+          console.error('Invalid authorization URL:', urlError);
+          toast({
+            title: "Invalid payment URL",
+            description: "The payment provider returned an invalid URL. Please try again or contact support.",
+            variant: "destructive",
+          });
+          setIsSubmitting(false);
+          return;
+        }
       } else {
         throw new Error("No authorization URL received");
       }
