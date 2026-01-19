@@ -30,6 +30,8 @@ import hellaTeeBlack2 from "@/assets/products/hella-tee-black-2.jpg";
 import designerHoodiePink1 from "@/assets/products/designer-hoodie-pink-1.jpg";
 import designerHoodiePink2 from "@/assets/products/designer-hoodie-pink-2.jpg";
 import designerHoodiePink3 from "@/assets/products/designer-hoodie-pink-3.jpg";
+import hotstuffCroptopBlack1 from "@/assets/products/hotstuff-croptop-black-1.jpg";
+import hotstuffCroptopBlack2 from "@/assets/products/hotstuff-croptop-black-2.jpg";
 
 export interface ColorVariant {
   name: string;
@@ -361,6 +363,30 @@ export const products: Product[] = [
       "Machine washable"
     ],
     reviews: { rating: 4.8, count: 76 }
+  },
+  {
+    id: 13,
+    name: "HOTSTUFF Crop Top",
+    price: 299,
+    image: hotstuffCroptopBlack1,
+    images: [hotstuffCroptopBlack1, hotstuffCroptopBlack2],
+    isOnSale: false,
+    isSelling: false,
+    category: "T-Shirts",
+    colors: [
+      { name: "Black", hex: "#1a1a1a", image: hotstuffCroptopBlack1 },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    description: "Stylish crop top featuring the signature 'OUICESTNOUS' logo print. Perfect for casual or streetwear styling.",
+    details: [
+      "100% Cotton",
+      "Lightweight fabric",
+      "Cropped fit",
+      "Screen-printed graphic",
+      "Soft hand feel",
+      "Machine washable"
+    ],
+    reviews: { rating: 4.5, count: 0 }
   },
 ];
 
