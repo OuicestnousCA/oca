@@ -371,7 +371,7 @@ export const products: Product[] = [
     image: hotstuffCroptopBlack1,
     images: [hotstuffCroptopBlack1, hotstuffCroptopBlack2],
     isOnSale: false,
-    isSelling: false,
+    isSelling: true,
     category: "T-Shirts",
     colors: [
       { name: "Black", hex: "#1a1a1a", image: hotstuffCroptopBlack1 },
