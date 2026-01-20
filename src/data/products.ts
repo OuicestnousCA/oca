@@ -34,6 +34,7 @@ import hotstuffCroptopBlack1 from "@/assets/products/hotstuff-croptop-black-1.jp
 import hotstuffCroptopBlack2 from "@/assets/products/hotstuff-croptop-black-2.jpg";
 import shorts530Black1 from "@/assets/products/530-shorts-black-1.jpg";
 import shorts530Black2 from "@/assets/products/530-shorts-black-2.jpg";
+import shorts530Black3 from "@/assets/products/530-shorts-black-3.jpg";
 
 export interface ColorVariant {
   name: string;
@@ -395,7 +396,7 @@ export const products: Product[] = [
     name: "530 Short",
     price: 499.99,
     image: shorts530Black1,
-    images: [shorts530Black1, shorts530Black2],
+    images: [shorts530Black1, shorts530Black2, shorts530Black3],
     isOnSale: false,
     isSelling: true,
     category: "Bottoms",
