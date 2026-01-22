@@ -260,25 +260,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </span>
           )}
         </div>
-
-        {/* Category */}
-        <p className="text-xs text-muted-foreground uppercase tracking-wider">
-          {product.category}
-        </p>
-
-        {/* Colors Count */}
-        {product.colors.length > 1 && (
-          <p className="text-xs text-muted-foreground">
-            {product.colors.length} Colours
-          </p>
-        )}
-        
-        {/* Selling Fast Indicator */}
-        {product.isSelling && (
-          <p className="text-xs font-semibold text-foreground pt-1">
-            Selling Fast
-          </p>
-        )}
       </div>
     </article>
   );
