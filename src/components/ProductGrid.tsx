@@ -2,10 +2,20 @@ import ProductCard from "./ProductCard";
 import { products } from "@/data/products";
 import { useMemo, useState } from "react";
 
+const NEW_BADGE_COUNT = 4;
+
 const ProductGrid = () => {
   const [sort, setSort] = useState<
     "popularity" | "latest" | "low-high" | "high-low"
   >("latest");
+
+  const newProductIds = useMemo(() => {
+    const newest = [...products]
+      .sort((a, b) => b.id - a.id)
+      .slice(0, NEW_BADGE_COUNT)
+      .map((p) => p.id);
+    return new Set(newest);
+  }, []);
 
   const displayedProducts = useMemo(() => {
     const list = [...products];
@@ -61,7 +71,11 @@ const ProductGrid = () => {
         
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
           {displayedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              isNew={newProductIds.has(product.id)}
+            />
           ))}
         </div>
       </div>
