@@ -64,6 +64,31 @@ export interface Product {
 
 export const products: Product[] = [
   {
+    id: 14,
+    name: "530 Short",
+    price: 499.99,
+    image: shorts530Black1,
+    images: [shorts530Black1, shorts530Black2, shorts530Black3],
+    isOnSale: false,
+    isSelling: true,
+    category: "Bottoms",
+    colors: [
+      { name: "Black", hex: "#1a1a1a", image: shorts530Black1 },
+    ],
+    sizes: ["XS", "S", "M", "L", "XL"],
+    description:
+      "Premium athletic shorts with contrast piping and signature branding. Features elastic waistband with drawstring for the perfect fit.",
+    details: [
+      "100% Polyester",
+      "Lightweight fabric",
+      "Elastic waistband with drawstring",
+      "Contrast piping detail",
+      "Embroidered logo",
+      "Machine washable",
+    ],
+    reviews: { rating: 4.7, count: 0 },
+  },
+  {
     id: 1,
     name: "YBY O Hoodie",
     price: 499.99,
@@ -390,30 +415,6 @@ export const products: Product[] = [
       "Machine washable"
     ],
     reviews: { rating: 4.5, count: 0 }
-  },
-  {
-    id: 14,
-    name: "530 Short",
-    price: 499.99,
-    image: shorts530Black1,
-    images: [shorts530Black1, shorts530Black2, shorts530Black3],
-    isOnSale: false,
-    isSelling: true,
-    category: "Bottoms",
-    colors: [
-      { name: "Black", hex: "#1a1a1a", image: shorts530Black1 },
-    ],
-    sizes: ["XS", "S", "M", "L", "XL"],
-    description: "Premium athletic shorts with contrast piping and signature branding. Features elastic waistband with drawstring for the perfect fit.",
-    details: [
-      "100% Polyester",
-      "Lightweight fabric",
-      "Elastic waistband with drawstring",
-      "Contrast piping detail",
-      "Embroidered logo",
-      "Machine washable"
-    ],
-    reviews: { rating: 4.7, count: 0 }
   },
 ];
 
