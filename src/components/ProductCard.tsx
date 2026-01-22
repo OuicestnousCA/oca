@@ -7,9 +7,10 @@ import type { Product, ColorVariant } from "@/data/products";
 
 interface ProductCardProps {
   product: Product;
+  isNew?: boolean;
 }
 
-const ProductCard = ({ product }: ProductCardProps) => {
+const ProductCard = ({ product, isNew = false }: ProductCardProps) => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const { isInWishlist, toggleWishlist } = useWishlist();
@@ -112,6 +113,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
     >
       {/* Image Container */}
       <div className="relative aspect-square overflow-hidden bg-secondary">
+        {/* NEW Badge */}
+        {isNew && (
+          <span className="absolute top-3 left-3 px-2 py-1 text-[10px] font-semibold tracking-widest bg-primary text-primary-foreground z-10">
+            NEW
+          </span>
+        )}
+
         {/* Image Slider */}
         {hasUniqueImages ? (
           <div 
