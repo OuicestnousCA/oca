@@ -35,6 +35,9 @@ import hotstuffCroptopBlack2 from "@/assets/products/hotstuff-croptop-black-2.jp
 import shorts530Black1 from "@/assets/products/530-shorts-black-1.jpg";
 import shorts530Black2 from "@/assets/products/530-shorts-black-2.jpg";
 import shorts530Black3 from "@/assets/products/530-shorts-black-3.jpg";
+import himLongSleeve1 from "@/assets/products/him-long-sleeve-1.jpg";
+import himLongSleeve2 from "@/assets/products/him-long-sleeve-2.jpg";
+import himLongSleeve3 from "@/assets/products/him-long-sleeve-3.jpg";
 
 export interface ColorVariant {
   name: string;
@@ -63,6 +66,29 @@ export interface Product {
 }
 
 export const products: Product[] = [
+  {
+    id: 15,
+    name: "HIM LONG SLEEVE",
+    price: 399,
+    image: himLongSleeve1,
+    images: [himLongSleeve1, himLongSleeve2, himLongSleeve3],
+    isOnSale: false,
+    isSelling: false,
+    category: "T-Shirts",
+    colors: [{ name: "Black", hex: "#1a1a1a", image: himLongSleeve1 }],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    description:
+      "Premium long sleeve tee in black with bold front and back graphics and sleeve detailing. Built for everyday wear with a clean streetwear silhouette.",
+    details: [
+      "Long sleeve",
+      "Graphic print front and back",
+      "Sleeve graphics",
+      "Ribbed cuffs",
+      "Relaxed fit",
+      "Machine washable",
+    ],
+    reviews: { rating: 4.7, count: 0 },
+  },
   {
     id: 14,
     name: "530 Short",
