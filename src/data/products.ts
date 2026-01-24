@@ -38,6 +38,8 @@ import shorts530Black3 from "@/assets/products/530-shorts-black-3.jpg";
 import himLongSleeve1 from "@/assets/products/him-long-sleeve-1.jpg";
 import himLongSleeve2 from "@/assets/products/him-long-sleeve-2.jpg";
 import himLongSleeve3 from "@/assets/products/him-long-sleeve-3.jpg";
+import redVTee1 from "@/assets/products/red-v-tee-1.jpg";
+import redVTee2 from "@/assets/products/red-v-tee-2.jpg";
 
 export interface ColorVariant {
   name: string;
@@ -66,6 +68,28 @@ export interface Product {
 }
 
 export const products: Product[] = [
+  {
+    id: 16,
+    name: "RED V TEE",
+    price: 199.99,
+    image: redVTee1,
+    images: [redVTee1, redVTee2],
+    isOnSale: false,
+    isSelling: false,
+    category: "T-Shirts",
+    colors: [{ name: "Red", hex: "#dc2626", image: redVTee1 }],
+    sizes: ["XS", "S", "M", "L", "XL", "XXL"],
+    description:
+      "Classic red tee with clean front logo detail and a comfortable everyday fit.",
+    details: [
+      "Short sleeve",
+      "Soft cotton feel",
+      "Crew neck",
+      "Regular fit",
+      "Machine washable",
+    ],
+    reviews: { rating: 4.7, count: 0 },
+  },
   {
     id: 15,
     name: "HIM LONG SLEEVE",
