@@ -128,6 +128,93 @@ export type Database = {
         }
         Relationships: []
       }
+      products: {
+        Row: {
+          category: string
+          colors: Json
+          created_at: string
+          description: string
+          details: Json
+          id: number
+          image: string
+          images: Json
+          is_active: boolean
+          is_on_sale: boolean
+          is_selling: boolean
+          name: string
+          original_price: number | null
+          price: number
+          review_count: number
+          review_rating: number
+          sizes: Json
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          category: string
+          colors?: Json
+          created_at?: string
+          description?: string
+          details?: Json
+          id?: number
+          image: string
+          images?: Json
+          is_active?: boolean
+          is_on_sale?: boolean
+          is_selling?: boolean
+          name: string
+          original_price?: number | null
+          price: number
+          review_count?: number
+          review_rating?: number
+          sizes?: Json
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          colors?: Json
+          created_at?: string
+          description?: string
+          details?: Json
+          id?: number
+          image?: string
+          images?: Json
+          is_active?: boolean
+          is_on_sale?: boolean
+          is_selling?: boolean
+          name?: string
+          original_price?: number | null
+          price?: number
+          review_count?: number
+          review_rating?: number
+          sizes?: Json
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      site_settings: {
+        Row: {
+          id: string
+          setting_key: string
+          setting_value: Json
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          setting_key: string
+          setting_value?: Json
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          setting_key?: string
+          setting_value?: Json
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           created_at: string
